@@ -9,25 +9,26 @@ class addUsuario extends cn
     }
 
     /**
-     * Obtiene un usuario por su ID
+     * ✅ Obtiene un usuario por su ID
      */
-    public function getUsuario($id_usuario)
+    public function getUsuarioById($id_usuario)
     {
         if (empty($id_usuario) || !is_numeric($id_usuario)) {
-            return false; // 🚫 ID inválido
+            return false;
         }
 
         $id_usuario = (int) $id_usuario;
-        $sql = "SELECT u.id_usuario, u.nombre, u.nombre_usuario, r.nombre_rol 
-                FROM usuarios u 
+        $sql = "SELECT u.id_usuario, u.nombre, u.nombre_usuario, u.id_rol, r.nombre_rol
+                FROM usuarios u
                 JOIN roles r ON u.id_rol = r.id_rol
                 WHERE u.id_usuario = '$id_usuario'";
 
-        return $this->consulta($sql);
+        $result = $this->consulta($sql);
+        return ($result && $result->num_rows > 0) ? $result->fetch_assoc() : false;
     }
 
     /**
-     * Obtiene todos los usuarios
+     * ✅ Obtiene todos los usuarios
      */
     public function getUsuarios()
     {
@@ -39,22 +40,21 @@ class addUsuario extends cn
     }
 
     /**
-     * Crea un nuevo usuario
+     * ✅ Crea un nuevo usuario
      */
     public function createUsuario($datos)
     {
         if (count($datos) < 4) {
-            return false; // 🚫 Faltan datos
+            return false;
         }
 
-        // Sanitizar entrada
         $nombre = trim($this->con->real_escape_string($datos[0]));
         $nombre_usuario = trim($this->con->real_escape_string($datos[1]));
         $contraseña = trim($this->con->real_escape_string($datos[2]));
         $id_rol = (int) $datos[3];
 
         if ($nombre === '' || $nombre_usuario === '' || $contraseña === '' || $id_rol <= 0) {
-            return false; // 🚫 Campos vacíos o inválidos
+            return false;
         }
 
         $sql = "INSERT INTO usuarios (nombre, nombre_usuario, contraseña, id_rol)
@@ -64,28 +64,26 @@ class addUsuario extends cn
     }
 
     /**
-     * Actualiza los datos de un usuario
+     * ✅ Actualiza los datos de un usuario (sin cambiar contraseña)
      */
-    public function updateUsuario($datos)
+    public function updateUsuarioSinPassword($id_usuario, $nombre, $nombre_usuario, $id_rol)
     {
-        if (count($datos) < 5) {
-            return false; // 🚫 Faltan datos
+        if (empty($id_usuario) || !is_numeric($id_usuario)) {
+            return false;
         }
 
-        $id_usuario = (int) $datos[0];
-        $nombre = trim($this->con->real_escape_string($datos[1]));
-        $nombre_usuario = trim($this->con->real_escape_string($datos[2]));
-        $contraseña = trim($this->con->real_escape_string($datos[3]));
-        $id_rol = (int) $datos[4];
+        $id_usuario = (int) $id_usuario;
+        $nombre = trim($this->con->real_escape_string($nombre));
+        $nombre_usuario = trim($this->con->real_escape_string($nombre_usuario));
+        $id_rol = (int) $id_rol;
 
-        if ($id_usuario <= 0 || $nombre === '' || $nombre_usuario === '' || $contraseña === '' || $id_rol <= 0) {
-            return false; // 🚫 Datos inválidos
+        if ($nombre === '' || $nombre_usuario === '' || $id_rol <= 0) {
+            return false;
         }
 
         $sql = "UPDATE usuarios 
                 SET nombre = '$nombre',
                     nombre_usuario = '$nombre_usuario',
-                    contraseña = '$contraseña',
                     id_rol = '$id_rol'
                 WHERE id_usuario = '$id_usuario'";
 
@@ -93,17 +91,16 @@ class addUsuario extends cn
     }
 
     /**
-     * Elimina un usuario por ID
+     * ✅ Elimina un usuario
      */
     public function deleteUsuario($id_usuario)
     {
         if (empty($id_usuario) || !is_numeric($id_usuario)) {
-            return false; // 🚫 ID inválido
+            return false;
         }
 
         $id_usuario = (int) $id_usuario;
         $sql = "DELETE FROM usuarios WHERE id_usuario = '$id_usuario'";
-
         return $this->consulta($sql);
     }
 }
