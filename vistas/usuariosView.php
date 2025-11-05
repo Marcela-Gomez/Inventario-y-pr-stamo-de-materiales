@@ -12,6 +12,18 @@ require_once("../modelo/usuarios.php");
 
 $usuarioModel = new addUsuario();
 
+// ✅ Eliminar usuario si se envía solicitud por GET
+if (isset($_GET['eliminar'])) {
+    $idEliminar = (int) $_GET['eliminar'];
+    if ($usuarioModel->deleteUsuario($idEliminar)) {
+        echo "<script>alert('✅ Usuario eliminado correctamente'); window.location='usuariosView.php';</script>";
+        exit;
+    } else {
+        echo "<script>alert('❌ Error al eliminar el usuario'); window.location='usuariosView.php';</script>";
+        exit;
+    }
+}
+
 // ✅ Obtener usuarios con manejo de errores
 $result = $usuarioModel->getUsuarios();
 $usuarios = [];
@@ -44,6 +56,7 @@ $rol = htmlspecialchars($usuarioSesion['rol']);
 
         .card {
             border-radius: 12px;
+            position: relative;
         }
 
         table {
@@ -55,12 +68,44 @@ $rol = htmlspecialchars($usuarioSesion['rol']);
             background-color: #007bff;
             color: white;
         }
+
+        .btn-editar {
+            background-color: #ffc107;
+            color: #000;
+            border: none;
+        }
+
+        .btn-editar:hover {
+            background-color: #e0a800;
+            color: white;
+        }
+
+        .btn-eliminar {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+        }
+
+        .btn-eliminar:hover {
+            background-color: #bb2d3b;
+        }
+
+        /* 🔹 Botón flotante en esquina superior derecha */
+        .btn-agregar {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
     </style>
 </head>
 
 <body>
     <div class="container mt-5">
         <div class="card shadow p-4">
+
+            <!-- 🔹 Botón para agregar nuevo usuario -->
+            <a href="agregarUsuarios.php" class="btn btn-primary btn-agregar">➕ Agregar Usuario</a>
+
             <h2 class="text-center mb-4">👥 Gestión de Usuarios</h2>
             <p class="text-center text-muted">
                 Sesión activa: <strong><?= $nombre ?></strong> (Rol: <?= $rol ?>)
@@ -71,13 +116,14 @@ $rol = htmlspecialchars($usuarioSesion['rol']);
                 <div class="alert alert-warning text-center"><?= htmlspecialchars($mensaje) ?></div>
             <?php else: ?>
                 <div class="table-responsive">
-                    <table class="table table-striped table-hover align-middle">
+                    <table class="table table-striped table-hover align-middle text-center">
                         <thead>
                             <tr>
                                 <th>ID</th>
                                 <th>Nombre</th>
                                 <th>Usuario</th>
                                 <th>Rol</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -87,6 +133,15 @@ $rol = htmlspecialchars($usuarioSesion['rol']);
                                     <td><?= htmlspecialchars($u['nombre']) ?></td>
                                     <td><?= htmlspecialchars($u['nombre_usuario']) ?></td>
                                     <td><?= htmlspecialchars($u['nombre_rol']) ?></td>
+                                    <td>
+                                        <a href="editarUsuario.php?id=<?= $u['id_usuario'] ?>" class="btn btn-editar btn-sm">
+                                            ✏️ Editar
+                                        </a>
+                                        <a href="?eliminar=<?= $u['id_usuario'] ?>" class="btn btn-eliminar btn-sm"
+                                            onclick="return confirm('⚠️ ¿Estás seguro de eliminar este usuario?');">
+                                            🗑 Eliminar
+                                        </a>
+                                    </td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>
@@ -96,7 +151,6 @@ $rol = htmlspecialchars($usuarioSesion['rol']);
 
             <div class="text-center mt-4">
                 <a href="../Inicio.php" class="btn btn-secondary">⬅️ Volver al Inicio</a>
-                <a href="../logout.php" class="btn btn-danger">🚪 Cerrar Sesión</a>
             </div>
         </div>
     </div>

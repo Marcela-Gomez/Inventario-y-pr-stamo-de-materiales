@@ -7,21 +7,18 @@ $error = "";
 
 // Solo procesar si el formulario fue enviado
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // ✅ Validar que los campos no estén vacíos
     $nombre_usuario = trim($_POST['nombre_usuario'] ?? '');
     $contraseña = trim($_POST['contraseña'] ?? '');
 
     if ($nombre_usuario === '' || $contraseña === '') {
         $error = "⚠️ Por favor complete todos los campos.";
     } else {
-        // ✅ Escapar de forma segura SIN tocar cn.php
         $temp_con = new mysqli('localhost', 'root', '', 'inventario1');
         if ($temp_con->connect_error) {
             $error = "❌ Error de conexión con la base de datos.";
         } else {
             $nombre_usuario_seguro = $temp_con->real_escape_string($nombre_usuario);
 
-            // Buscar usuario en la base de datos
             $query = "
                 SELECT u.id_usuario, u.nombre, u.nombre_usuario, u.contraseña, r.nombre_rol 
                 FROM usuarios u 
@@ -35,9 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($result && mysqli_num_rows($result) > 0) {
                 $user = mysqli_fetch_assoc($result);
 
-                // ✅ Comparar contraseña (texto plano)
                 if ($contraseña === $user['contraseña']) {
-                    // Guardar datos en sesión
+                    // ✅ Guardar sesión
                     $_SESSION['usuario'] = [
                         'id' => $user['id_usuario'],
                         'nombre' => $user['nombre'],
@@ -45,9 +41,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         'rol' => $user['nombre_rol']
                     ];
 
-                    // Redirigir al inicio
-                    header("Location: Inicio.php");
+                    // ✅ Redirigir según el rol
+                    switch (strtolower($user['nombre_rol'])) {
+                        case 'administrador':
+                            header("Location: Inicio.php");
+                            break;
+                        case 'prestamista':
+                            header("Location: vistas/prestamista.php");
+                            break;
+                        case 'prestatario':
+                            header("Location: vistas/prestatario.php");
+                            break;
+                        case 'comprador':
+                            header("Location: vistas/comprador.php");
+                            break;
+                        default:
+                            header("Location: index.php");
+                            break;
+                    }
                     exit;
+
                 } else {
                     $error = "❌ Contraseña incorrecta.";
                 }
@@ -58,7 +71,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 
