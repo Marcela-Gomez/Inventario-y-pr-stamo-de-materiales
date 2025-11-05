@@ -29,12 +29,11 @@ class addProducto extends cn
         $tipo_producto = $datos[3];
         $puede_devolverse = $datos[4];
         $stock = $datos[5];
-        $precio = $datos[6];
-        $fecha_vencimiento = $datos[7];
-        $estado = $datos[8];
+        $fecha_vencimiento = $datos[6];
+        $estado = $datos[7];
 
-        $sql = "INSERT INTO productos (nombre_producto, descripcion, id_categoria, tipo_producto, puede_devolverse, stock, precio, fecha_vencimiento, estado)
-                VALUES ('$nombre_producto', '$descripcion', '$id_categoria', '$tipo_producto', '$puede_devolverse', '$stock', '$precio', '$fecha_vencimiento', '$estado')";
+        $sql = "INSERT INTO productos (nombre_producto, descripcion, id_categoria, tipo_producto, puede_devolverse, stock, fecha_vencimiento, estado)
+                VALUES ('$nombre_producto', '$descripcion', '$id_categoria', '$tipo_producto', '$puede_devolverse', '$stock', '$fecha_vencimiento', '$estado')";
         $this->consulta($sql);
     }
 
@@ -47,9 +46,8 @@ class addProducto extends cn
         $tipo_producto = $datos[4];
         $puede_devolverse = $datos[5];
         $stock = $datos[6];
-        $precio = $datos[7];
-        $fecha_vencimiento = $datos[8];
-        $estado = $datos[9];
+        $fecha_vencimiento = $datos[7];
+        $estado = $datos[8];
 
         $sql = "UPDATE productos SET 
                     nombre_producto = '$nombre_producto',
@@ -58,7 +56,6 @@ class addProducto extends cn
                     tipo_producto = '$tipo_producto',
                     puede_devolverse = '$puede_devolverse',
                     stock = '$stock',
-                    precio = '$precio',
                     fecha_vencimiento = '$fecha_vencimiento',
                     estado = '$estado'
                 WHERE id_producto = '$id_producto'";
@@ -68,6 +65,26 @@ class addProducto extends cn
     public function deleteProducto($id_producto)
     {
         $sql = "DELETE FROM productos WHERE id_producto = '$id_producto'";
+        $this->consulta($sql);
+    }
+
+    // 🔍 Obtener producto por ID (para registrar compra)
+    public function obtenerProductoPorId($id_producto)
+    {
+        $sql = "SELECT * FROM productos WHERE id_producto = '$id_producto' LIMIT 1";
+        $resultado = $this->consulta($sql);
+
+        if ($resultado && $resultado->num_rows > 0) {
+            return $resultado->fetch_assoc();
+        } else {
+            return null;
+        }
+    }
+
+    // 🔄 Actualizar solo el stock de un producto
+    public function actualizarStock($id_producto, $nuevoStock)
+    {
+        $sql = "UPDATE productos SET stock = '$nuevoStock' WHERE id_producto = '$id_producto'";
         $this->consulta($sql);
     }
 }
