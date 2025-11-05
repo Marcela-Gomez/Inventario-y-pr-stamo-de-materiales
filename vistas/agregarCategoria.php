@@ -1,119 +1,119 @@
 <?php
-require_once('../modelo/addCategoria.php');
+session_start();
+require_once("../modelo/addCategoria.php");
 
-// === FRONTEND ===
-$categoria = new addCategoria();
+// 🔒 Verificar sesión activa
+if (!isset($_SESSION['usuario'])) {
+    header("Location: ../index.php");
+    exit;
+}
 
-// Procesar formularios
+$categoriaModel = new addCategoria();
+$mensaje = "";
+$categoriaEditar = null;
+
+// 🔹 Si viene con ?editar=ID, obtener datos de esa categoría
+if (isset($_GET['editar'])) {
+    $cat = $categoriaModel->getCategoria($_GET['editar']);
+    $categoriaEditar = mysqli_fetch_assoc($cat);
+}
+
+// 🔹 Procesar formulario
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['crear'])) {
-        $nombre = $_POST['nombre_categoria'];
-        $categoria->createCategoria($nombre);
-        echo "<script>alert('✅ Categoría creada correctamente');</script>";
-    }
-    
-    if (isset($_POST['actualizar'])) {
-        $id_categoria = $_POST['id_categoria'];
-        $nombre_categoria = $_POST['nombre_categoria'];
-        $datos = [$id_categoria, $nombre_categoria];
-        $categoria->updateCategoria($datos);
-        echo "<script>alert('✅ Categoría actualizada correctamente');</script>";
+    $nombre = trim($_POST['nombre_categoria']);
+
+    if ($nombre === "") {
+        $mensaje = "⚠️ El nombre no puede estar vacío.";
+    } else {
+        if (isset($_POST['actualizar'])) {
+            $id = $_POST['id_categoria'];
+            $categoriaModel->updateCategoria([$id, $nombre]);
+            echo "<script>alert('✅ Categoría actualizada correctamente'); window.location='verCategoria.php';</script>";
+            exit;
+        } else {
+            $categoriaModel->createCategoria($nombre);
+            echo "<script>alert('✅ Categoría creada correctamente'); window.location='verCategoria.php';</script>";
+            exit;
+        }
     }
 }
-
-// Procesar eliminación
-if (isset($_GET['eliminar'])) {
-    $id = $_GET['eliminar'];
-    $categoria->deleteCategoria($id);
-    echo "<script>alert('✅ Categoría eliminada correctamente'); window.location='agregarCategoria.php';</script>";
-}
-
-// Obtener todas las categorías
-$categorias = $categoria->getCategorias();
 ?>
-
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
-    <title>CRUD de Categorías</title>
+    <title><?= $categoriaEditar ? 'Editar Categoría' : 'Agregar Categoría' ?></title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-</head>
-<body class="bg-light">
-<div class="container mt-4">
-    <div class="row">
-        <div class="col-md-4">
-            <div class="card shadow p-4 mb-4">
-                <h4 class="text-center mb-3">
-                    <?= isset($_GET['editar']) ? 'Editar Categoría' : 'Agregar Categoría' ?>
-                </h4>
-                
-                <?php if (isset($_GET['editar'])): 
-                    $cat_editar = $categoria->getCategoria($_GET['editar']);
-                    $cat_data = mysqli_fetch_assoc($cat_editar);
-                ?>
-                <form method="POST">
-                    <input type="hidden" name="id_categoria" value="<?= $cat_data['id_categoria'] ?>">
-                    <div class="mb-3">
-                        <label class="form-label">Nombre de Categoría</label>
-                        <input type="text" name="nombre_categoria" class="form-control" 
-                               value="<?= $cat_data['nombre_categoria'] ?>" required>
-                    </div>
-                    <div class="d-grid gap-2">
-                        <button type="submit" name="actualizar" class="btn btn-warning">Actualizar</button>
-                        <a href="agregarCategoria.php" class="btn btn-secondary">Cancelar</a>
-                    </div>
-                </form>
-                <?php else: ?>
-                <form method="POST">
-                    <div class="mb-3">
-                        <label class="form-label">Nombre de Categoría</label>
-                        <input type="text" name="nombre_categoria" class="form-control" required>
-                    </div>
-                    <div class="d-grid">
-                        <button type="submit" name="crear" class="btn btn-success">Crear Categoría</button>
-                    </div>
-                </form>
-                <?php endif; ?>
-            </div>
-        </div>
+    <style>
+        body {
+            background-color: #f4f6f9;
+        }
 
-        <div class="col-md-8">
-            <div class="card shadow p-4">
-                <h4 class="text-center mb-4">Lista de Categorías</h4>
-                
-                <?php if (mysqli_num_rows($categorias) > 0): ?>
-                <div class="table-responsive">
-                    <table class="table table-striped">
-                        <thead class="table-dark">
-                            <tr>
-                                <th>ID</th>
-                                <th>Nombre</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php while ($row = mysqli_fetch_assoc($categorias)): ?>
-                            <tr>
-                                <td><?= $row['id_categoria'] ?></td>
-                                <td><?= $row['nombre_categoria'] ?></td>
-                                <td>
-                                    <a href="agregarCategoria.php?editar=<?= $row['id_categoria'] ?>" class="btn btn-sm btn-primary">Editar</a>
-                                    <a href="agregarCategoria.php?eliminar=<?= $row['id_categoria'] ?>" class="btn btn-sm btn-danger"
-                                       onclick="return confirm('¿Estás seguro?')">Eliminar</a>
-                                </td>
-                            </tr>
-                            <?php endwhile; ?>
-                        </tbody>
-                    </table>
-                </div>
-                <?php else: ?>
-                <div class="alert alert-info text-center">No hay categorías registradas.</div>
-                <?php endif; ?>
+        .card {
+            max-width: 550px;
+            margin: 80px auto;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+
+        h2 {
+            color: #007bff;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+        }
+
+        .btn-secondary:hover {
+            background-color: #545b62;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <h2><?= $categoriaEditar ? '✏️ Editar Categoría' : '➕ Agregar Nueva Categoría' ?></h2>
+        <hr>
+
+        <?php if ($mensaje): ?>
+            <div class="alert alert-warning text-center"><?= htmlspecialchars($mensaje) ?></div>
+        <?php endif; ?>
+
+        <form method="POST">
+            <?php if ($categoriaEditar): ?>
+                <input type="hidden" name="id_categoria" value="<?= $categoriaEditar['id_categoria'] ?>">
+            <?php endif; ?>
+
+            <div class="mb-3">
+                <label class="form-label">Nombre de Categoría:</label>
+                <input type="text" name="nombre_categoria" class="form-control"
+                    value="<?= $categoriaEditar['nombre_categoria'] ?? '' ?>" required>
             </div>
-        </div>
+
+            <div class="d-grid gap-2">
+                <?php if ($categoriaEditar): ?>
+                    <button type="submit" name="actualizar" class="btn btn-primary">💾 Actualizar</button>
+                <?php else: ?>
+                    <button type="submit" name="crear" class="btn btn-success">💾 Guardar</button>
+                <?php endif; ?>
+                <a href="verCategoria.php" class="btn btn-secondary">⬅️ Volver</a>
+            </div>
+        </form>
     </div>
-</div>
 </body>
+
 </html>
