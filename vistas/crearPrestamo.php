@@ -1,0 +1,161 @@
+<?php
+session_start();
+require_once(__DIR__ . '/../modelo/addMovimiento.php');
+require_once(__DIR__ . '/../cn.php');
+
+// 🔒 Verificar sesión activa
+if (!isset($_SESSION['usuario']) || !is_array($_SESSION['usuario'])) {
+    header("Location: ../index.php");
+    exit;
+}
+
+$usuario = $_SESSION['usuario'];
+
+// 🧩 Obtener ID de usuario de forma segura
+$id_usuario = $_SESSION['usuario']['id'];
+echo $id_usuario;
+if ($id_usuario <= 0) {
+    echo "<script>alert('⚠️ Error: No se encontró el ID del usuario. Vuelve a iniciar sesión.'); window.location.href='../index.php';</script>";
+    exit;
+}
+
+$nombre = htmlspecialchars($usuario['nombre'] ?? 'Usuario');
+$nombreUsuario = htmlspecialchars($usuario['usuario'] ?? 'Desconocido');
+$rol = htmlspecialchars(ucfirst($usuario['rol'] ?? 'Sin rol'));
+
+// 📦 Conexión y productos disponibles
+$cn = new cn();
+$productos = $cn->consulta("SELECT id_producto, nombre_producto, stock FROM productos WHERE estado = 'Disponible' and stock > 0 and puede_devolverse = 1");
+
+$mensaje = "";
+
+// ✅ Procesar envío del formulario
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $movimiento = new addMovimiento();
+
+    $datos = [
+        'id_producto' => $_POST['id_producto'] ?? 0,
+        'cantidad' => $_POST['cantidad'] ?? 0,
+        'tipo_movimiento' => 'Prestamo',
+        'observacion' => $_POST['observacion'] ?? '',
+        'id_prestatario' => $id_usuario
+    ];
+
+    $resultado = $movimiento->registrarMovimiento($datos);
+
+    if (isset($resultado['success'])) {
+        $mensaje = "<div class='alert alert-success text-center mt-3'>✅ Préstamo registrado correctamente.</div>";
+    } else {
+        $error = htmlspecialchars($resultado['error'] ?? 'Error desconocido.');
+        $mensaje = "<div class='alert alert-danger text-center mt-3'>❌ $error</div>";
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Registrar Préstamo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f6f9;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .card {
+            max-width: 600px;
+            margin: 50px auto;
+            border-radius: 15px;
+            background: #fff;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+        }
+
+        h2 {
+            font-weight: bold;
+            color: #333;
+            text-align: center;
+        }
+
+        .btn-verde {
+            background-color: #198754;
+            color: white;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+
+        .btn-verde:hover {
+            background-color: #157347;
+        }
+
+        .btn-gris {
+            background-color: #6c757d;
+            color: white;
+            transition: 0.2s;
+        }
+
+        .btn-gris:hover {
+            background-color: #5a6268;
+        }
+
+        label {
+            font-weight: 500;
+        }
+
+        .alert {
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="card">
+            <h2>➕ Registrar Préstamo</h2>
+            <p class="text-center text-muted mb-4">
+                Bienvenido <strong><?= $nombre ?></strong> (<?= $nombreUsuario ?>) — Rol: <?= $rol ?>
+            </p>
+
+            <?= $mensaje ?>
+
+            <form method="POST" action="">
+                <!-- Producto -->
+                <div class="mb-3">
+                    <label for="id_producto" class="form-label">Producto</label>
+                    <select class="form-select" name="id_producto" id="id_producto" required>
+                        <option value="">-- Selecciona un producto --</option>
+                        <?php while ($p = $productos->fetch_assoc()): ?>
+                            <option value="<?= $p['id_producto'] ?>">
+                                <?= htmlspecialchars($p['nombre_producto']) ?> (Stock: <?= $p['stock'] ?>)
+                            </option>
+                        <?php endwhile; ?>
+                    </select>
+                </div>
+
+                <!-- Cantidad -->
+                <div class="mb-3">
+                    <label for="cantidad" class="form-label">Cantidad a prestar</label>
+                    <input type="number" name="cantidad" id="cantidad" class="form-control" min="1" required>
+                </div>
+
+                <!-- Observación -->
+                <div class="mb-3">
+                    <label for="observacion" class="form-label">Observación (opcional)</label>
+                    <textarea name="observacion" id="observacion" class="form-control" rows="3"
+                        placeholder="Notas sobre el préstamo..."></textarea>
+                </div>
+
+                <!-- Botones -->
+                <div class="text-center mt-4">
+                    <a href="prestatario.php" class="btn btn-gris px-4">⬅ Volver</a>
+                    <button type="submit" class="btn btn-verde px-4">💾 Registrar Préstamo</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
