@@ -73,11 +73,14 @@ if (empty($nombreUsuario) || empty($rol)) {
             <hr>
 
             <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mt-4">
-                <a href="listar_productos.php" class="btn btn-success btn-lg px-4">
+                <a href="vistas/verProductoView.php" class="btn btn-success btn-lg px-4">
                     🛒 Ver Productos
                 </a>
                 <a href="vistas/usuariosView.php" class="btn btn-primary btn-lg px-4">
                     👥 Gestionar Usuarios
+                </a>
+                <a href="vistas/verCategoria.php" class="btn btn-warning btn-lg px-4">
+                    📦 Ver Categorías
                 </a>
                 <a href="logout.php" class="btn btn-danger btn-lg px-4">
                     🚪 Cerrar Sesión
