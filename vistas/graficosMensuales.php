@@ -137,6 +137,53 @@ $colores = [
     "Salida"     => "rgba(239,68,68,0.7)",
     "Compra"    => "rgba(16,185,129,0.7)"
 ];
+
+//////////////////////////
+// Movimientos de Devoluciones por mes (tabla)
+$sql_dev_mes_detalle = "SELECT
+  DATE_FORMAT(m.fecha_movimiento, '%Y-%m') AS mes,
+  m.tipo_movimiento,
+  m.id_movimiento,
+  p.nombre_producto AS producto,
+  m.cantidad,
+  m.observacion,
+  uc.nombre AS comprador,
+  up.nombre AS prestatario,
+  um.nombre AS prestamista,
+  m.fecha_movimiento
+FROM movimientos m
+LEFT JOIN productos p ON p.id_producto = m.id_producto
+LEFT JOIN usuarios uc ON uc.id_usuario = m.id_comprador
+LEFT JOIN usuarios up ON up.id_usuario = m.id_prestatario
+LEFT JOIN usuarios um ON um.id_usuario = m.id_prestamista
+WHERE m.tipo_movimiento = 'Devolución'
+ORDER BY mes DESC, m.fecha_movimiento DESC";
+
+$result_dev_mes_detalle = $db->consulta($sql_dev_mes_detalle);
+
+//////////////////////////
+// Movimientos de Préstamos por mes (tabla)
+$sql_prestamos_mes_detalle = "SELECT
+  DATE_FORMAT(m.fecha_movimiento, '%Y-%m') AS mes,
+  m.tipo_movimiento,
+  m.id_movimiento,
+  p.nombre_producto AS producto,
+  m.cantidad,
+  m.observacion,
+  uc.nombre AS comprador,
+  up.nombre AS prestatario,
+  um.nombre AS prestamista,
+  m.fecha_movimiento
+FROM movimientos m
+LEFT JOIN productos p ON p.id_producto = m.id_producto
+LEFT JOIN usuarios uc ON uc.id_usuario = m.id_comprador
+LEFT JOIN usuarios up ON up.id_usuario = m.id_prestatario
+LEFT JOIN usuarios um ON um.id_usuario = m.id_prestamista
+WHERE m.tipo_movimiento = 'Préstamo'
+ORDER BY mes DESC, m.fecha_movimiento DESC";
+
+$result_prestamos_mes_detalle = $db->consulta($sql_prestamos_mes_detalle);
+
 ?>
 
 <!DOCTYPE html>
@@ -228,6 +275,86 @@ $colores = [
 			</tbody>
 		</table>
 	</div>
+
+    <!-- 🔹 Tabla: Devoluciones por mes -->
+<div class="container">
+	<h2>Devoluciones por Mes</h2>
+	<table id="tabla-devoluciones-mes">
+		<thead>
+			<tr>
+				<th>Mes</th>
+				<th>ID Movimiento</th>
+				<th>Producto</th>
+				<th>Cantidad</th>
+				<th>Observación</th>
+				<th>Comprador</th>
+				<th>Prestatario</th>
+				<th>Prestamista</th>
+				<th>Fecha Movimiento</th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php if($result_dev_mes_detalle && $result_dev_mes_detalle->num_rows>0): ?>
+				<?php while($row=$result_dev_mes_detalle->fetch_assoc()): ?>
+					<tr>
+						<td><?= $row['mes'] ?></td>
+						<td><?= $row['id_movimiento'] ?></td>
+						<td><?= htmlspecialchars($row['producto']) ?></td>
+						<td><?= $row['cantidad'] ?></td>
+						<td><?= htmlspecialchars($row['observacion']) ?></td>
+						<td><?= htmlspecialchars($row['comprador']) ?></td>
+						<td><?= htmlspecialchars($row['prestatario']) ?></td>
+						<td><?= htmlspecialchars($row['prestamista']) ?></td>
+						<td><?= $row['fecha_movimiento'] ?></td>
+					</tr>
+				<?php endwhile; ?>
+			<?php else: ?>
+				<tr><td colspan="9" style="text-align:center;">No hay datos de devoluciones</td></tr>
+			<?php endif; ?>
+		</tbody>
+	</table>
+	<button onclick="exportToExcel('tabla-devoluciones-mes','Devoluciones_Por_Mes.xlsx')" style="background:#3b82f6;color:white;">Descargar Excel</button>
+</div>
+
+<!-- 🔹 Tabla: Préstamos por mes -->
+<div class="container">
+	<h2>Préstamos por Mes</h2>
+	<table id="tabla-prestamos-mes">
+		<thead>
+			<tr>
+				<th>Mes</th>
+				<th>ID Movimiento</th>
+				<th>Producto</th>
+				<th>Cantidad</th>
+				<th>Observación</th>
+				<th>Comprador</th>
+				<th>Prestatario</th>
+				<th>Prestamista</th>
+				<th>Fecha Movimiento</th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php if($result_prestamos_mes_detalle && $result_prestamos_mes_detalle->num_rows>0): ?>
+				<?php while($row=$result_prestamos_mes_detalle->fetch_assoc()): ?>
+					<tr>
+						<td><?= $row['mes'] ?></td>
+						<td><?= $row['id_movimiento'] ?></td>
+						<td><?= htmlspecialchars($row['producto']) ?></td>
+						<td><?= $row['cantidad'] ?></td>
+						<td><?= htmlspecialchars($row['observacion']) ?></td>
+						<td><?= htmlspecialchars($row['comprador']) ?></td>
+						<td><?= htmlspecialchars($row['prestatario']) ?></td>
+						<td><?= htmlspecialchars($row['prestamista']) ?></td>
+						<td><?= $row['fecha_movimiento'] ?></td>
+					</tr>
+				<?php endwhile; ?>
+			<?php else: ?>
+				<tr><td colspan="9" style="text-align:center;">No hay datos de préstamos</td></tr>
+			<?php endif; ?>
+		</tbody>
+	</table>
+	<button onclick="exportToExcel('tabla-prestamos-mes','Prestamos_Por_Mes.xlsx')" style="background:#10b981;color:white;">Descargar Excel</button>
+</div>
 
 	<div class="container">
 		<h2>Movimientos últimos 6 meses</h2>
