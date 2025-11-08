@@ -82,6 +82,12 @@ if (empty($nombreUsuario) || empty($rol)) {
                 <a href="vistas/verCategoria.php" class="btn btn-warning btn-lg px-4">
                     📦 Ver Categorías
                 </a>
+                <a href="vistas/graficos.php" class="btn btn-info btn-lg px-4">
+                    📊 Gráficos
+                </a>
+                <a href="vistas/graficosMensuales.php" class="btn btn-info btn-lg px-4">
+                    📈 Gráficos Mensuales
+                </a>
                 <a href="logout.php" class="btn btn-danger btn-lg px-4">
                     🚪 Cerrar Sesión
                 </a>

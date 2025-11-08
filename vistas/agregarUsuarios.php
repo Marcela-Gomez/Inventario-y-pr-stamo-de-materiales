@@ -29,7 +29,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if ($nombre === '' || $usuario === '' || $contraseña === '' || $id_rol <= 0) {
         $mensaje = "⚠️ Todos los campos son obligatorios.";
     } else {
-        $resultado = $usuarioModel->createUsuario([$nombre, $usuario, $contraseña, $id_rol]);
+        // ✅ Hashear contraseña antes de guardar
+$contraseña_hash = password_hash($contraseña, PASSWORD_DEFAULT);
+
+$resultado = $usuarioModel->createUsuario([$nombre, $usuario, $contraseña_hash, $id_rol]);
         if ($resultado) {
             header("Location: usuariosView.php?exito=1");
             exit;
