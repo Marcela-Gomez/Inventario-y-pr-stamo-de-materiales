@@ -72,19 +72,91 @@ $result_stock_actual = $db->consulta($sql_stock_actual);
 <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
 
 <style>
-	body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f2f5; padding: 20px; }
-	h2 { text-align: center; color: #333; margin-top: 30px; }
-	.container { max-width: 1000px; margin: 30px auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-	table { width: 100%; border-collapse: collapse; margin-bottom: 40px; }
-	th, td { padding: 12px 20px; text-align: left; }
-	th { background: linear-gradient(90deg, #4f46e5, #818cf8); color: #fff; text-transform: uppercase; letter-spacing: 0.05em; }
-	tr:nth-child(even) { background: #f9f9f9; }
-	tr:hover { background: #e0e7ff; transition: 0.3s; }
-	.low-stock { color: #d14343; font-weight: bold; }
+	body {
+		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+		background: #F8F5F0;
+		padding: 20px;
+		color: #2B2B2B;
+	}
+
+	h2 {
+		text-align: center;
+		color: #8B0000;
+		margin-top: 30px;
+	}
+
+	.container {
+		max-width: 1000px;
+		margin: 30px auto;
+		background: #F8F5F0;
+		padding: 20px;
+		border-radius: 8px;
+		box-shadow: 0 5px 15px rgba(139, 0, 0, 0.2);
+	}
+
+	table {
+		width: 100%;
+		border-collapse: collapse;
+		margin-bottom: 40px;
+		background: #fff;
+	}
+
+	th, td {
+		padding: 12px 20px;
+		text-align: left;
+		border-bottom: 1px solid #B38C00;
+	}
+
+	th {
+		background-color: #8B0000;
+		color: #F8F5F0;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+	}
+
+	tr:nth-child(even) { background: #F8F5F0; }
+	tr:hover { background: #FFF3E0; transition: 0.3s; }
+
+	.low-stock {
+		color: #9B001F;
+		font-weight: bold;
+	}
+
 	canvas { max-width: 100%; }
-	button { transition: 0.2s; }
+
+	button {
+		transition: 0.2s;
+		font-weight: bold;
+		color: #F8F5F0;
+		border: none;
+		border-radius: 6px;
+		padding: 10px 20px;
+		cursor: pointer;
+		box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+	}
+
 	button:hover { opacity: 0.9; }
+
+	/* Botón PDF */
+	button[onclick*="generatePDF"] {
+		background: #B38C00;
+	}
+
+	button[onclick*="generatePDF"]:hover {
+		background: #8B0000;
+	}
+
+	/* Botón Excel */
+	button[onclick*="exportToExcel"] {
+		background: #6F4E37;
+	}
+
+	button[onclick*="exportToExcel"]:hover {
+		background: #9B001F;
+	}
 </style>
+
+
 </head>
 <body>
 

@@ -60,40 +60,65 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <title>Editar Usuario</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <style>
-        body {
-            background-color: #f4f6f9;
-        }
+    body {
+        background-color: #F8F5F0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        color: #2B2B2B;
+    }
 
-        .card {
-            border-radius: 15px;
-            max-width: 600px;
-            margin: 60px auto;
-            padding: 30px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
+    .card {
+        border-radius: 15px;
+        max-width: 600px;
+        margin: 60px auto;
+        padding: 30px;
+        box-shadow: 0 5px 15px rgba(139, 0, 0, 0.2);
+        background-color: white;
+    }
 
-        h2 {
-            color: #007bff;
-            font-weight: bold;
-        }
+    h2 {
+        color: #8B0000;
+        font-weight: bold;
+        text-align: center;
+    }
 
-        .btn-primary {
-            background-color: #007bff;
-            border: none;
-        }
+    .btn-primary {
+        background-color: #8B0000;
+        border: none;
+        color: white;
+    }
 
-        .btn-primary:hover {
-            background-color: #0056b3;
-        }
+    .btn-primary:hover {
+        background-color: #9B001F;
+    }
 
-        .btn-secondary {
-            background-color: #6c757d;
-        }
+    .btn-secondary {
+        background-color: #6F4E37;
+        color: white;
+    }
 
-        .btn-secondary:hover {
-            background-color: #545b62;
-        }
-    </style>
+    .btn-secondary:hover {
+        background-color: #5C3B2E;
+    }
+
+    input, select {
+        border: 1px solid #B38C00;
+    }
+
+    input:focus, select:focus {
+        border-color: #8B0000;
+        box-shadow: 0 0 0 3px rgba(139, 0, 0, 0.1);
+        outline: none;
+    }
+
+    label {
+        font-weight: 500;
+    }
+
+    .alert {
+        font-size: 0.95rem;
+    }
+</style>
+
 </head>
 
 <body>

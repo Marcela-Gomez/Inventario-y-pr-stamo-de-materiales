@@ -39,7 +39,6 @@ $compras = $mov->consulta("
     ORDER BY m.fecha_movimiento DESC
 ");
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -48,9 +47,20 @@ $compras = $mov->consulta("
     <title>Panel del Comprador</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <style>
+        /* ============================================================
+           🎨 PALETA ITCA-FEPADE
+           ------------------------------------------------------------
+           - Vino Principal:        #8B0000
+           - Rojo Ladrillo:         #9B001F
+           - Dorado/Ocre:           #B38C00
+           - Café Suave:            #6F4E37
+           - Fondo Claro:           #F8F5F0
+           - Texto Oscuro:          #2B2B2B
+           ============================================================ */
         body {
-            background-color: #eef2f7;
+            background-color: #F8F5F0;
             font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            color: #2B2B2B;
         }
 
         .card {
@@ -64,7 +74,7 @@ $compras = $mov->consulta("
 
         h1 {
             font-weight: bold;
-            color: #2c3e50;
+            color: #8B0000;
         }
 
         .btn-lg {
@@ -73,42 +83,64 @@ $compras = $mov->consulta("
         }
 
         table th {
-            background-color: #0d6efd;
+            background-color: #8B0000;
             color: white;
         }
 
         .btn-verde {
-            background-color: #28a745;
+            background-color: #B38C00;
             color: white;
         }
 
         .btn-verde:hover {
-            background-color: #218838;
+            background-color: #9B001F;
             color: white;
         }
 
         .btn-gris {
-            background-color: #6c757d;
+            background-color: #6F4E37;
             color: white;
         }
 
         .btn-gris:hover {
-            background-color: #5a6268;
+            background-color: #5a3d2e;
             color: white;
         }
 
         .btn-azul {
-            background-color: #0d6efd;
+            background-color: #8B0000;
             color: white;
         }
 
         .btn-azul:hover {
-            background-color: #0b5ed7;
+            background-color: #9B001F;
             color: white;
         }
 
         hr {
-            border: 1px solid #dee2e6;
+            border: 1px solid #B38C00;
+        }
+
+        .text-muted {
+            color: #6F4E37 !important;
+        }
+
+        .badge.bg-success {
+            background-color: #B38C00 !important;
+        }
+
+        .badge.bg-primary {
+            background-color: #8B0000 !important;
+        }
+
+        .btn-outline-primary {
+            border-color: #8B0000;
+            color: #8B0000;
+        }
+
+        .btn-outline-primary:hover {
+            background-color: #8B0000;
+            color: white;
         }
     </style>
 </head>
@@ -149,7 +181,7 @@ $compras = $mov->consulta("
                             <?php $contador = 0; ?>
                             <?php while ($row = $compras->fetch_assoc()): ?>
                                 <?php if ($contador++ >= 5)
-                                    break; // solo mostrar las 5 más recientes ?>
+                                    break; ?>
                                 <tr>
                                     <td><?= htmlspecialchars($row['id_movimiento']) ?></td>
                                     <td><?= htmlspecialchars($row['nombre_producto']) ?></td>

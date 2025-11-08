@@ -69,46 +69,80 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <title>Registrar Compra</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    
     <style>
-        body {
-            background-color: #f5f6fa;
-            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        }
+    /* ============================================================
+       🎨 PALETA INSTITUCIONAL ITCA-FEPADE
+       ------------------------------------------------------------
+       - Vino Principal:        #8B0000
+       - Rojo Ladrillo:         #9B001F
+       - Dorado/Ocre:           #B38C00
+       - Café Suave:            #6F4E37
+       - Fondo Claro:           #F8F5F0
+       - Texto Oscuro:          #2B2B2B
+    ============================================================ */
 
-        .card {
-            max-width: 600px;
-            margin: 50px auto;
-            border-radius: 15px;
-            background: #fff;
-            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
-            padding: 2rem;
-        }
+    body {
+        background-color: #F8F5F0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        color: #2B2B2B;
+    }
 
-        h2 {
-            text-align: center;
-            font-weight: bold;
-            color: #333;
-        }
+    .card {
+        max-width: 600px;
+        margin: 50px auto;
+        border-radius: 15px;
+        background: #fff;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        padding: 2rem;
+        border-top: 5px solid #8B0000; /* Toque institucional */
+    }
 
-        .btn-primary {
-            background-color: #0d6efd;
-            border: none;
-        }
+    h2 {
+        text-align: center;
+        font-weight: bold;
+        color: #8B0000;
+    }
 
-        .btn-primary:hover {
-            background-color: #0b5ed7;
-        }
+    .btn-primary {
+        background-color: #B38C00; /* Dorado/Ocre */
+        color: #fff;
+        border: 1px solid #6F4E37;
+        transition: all 0.3s ease;
+    }
 
-        .btn-volver {
-            background-color: #6c757d;
-            color: white;
-        }
+    .btn-primary:hover {
+        background-color: #6F4E37; /* Café Suave */
+        border-color: #B38C00;
+        color: #fff;
+    }
 
-        .btn-volver:hover {
-            background-color: #5a6268;
-            color: white;
-        }
-    </style>
+    .btn-volver {
+        background-color: #6F4E37; /* Café Suave */
+        color: #fff;
+        border: 1px solid #8B0000;
+    }
+
+    .btn-volver:hover {
+        background-color: #9B001F; /* Rojo Ladrillo */
+        color: #fff;
+        border-color: #8B0000;
+    }
+
+    select.form-select, input.form-control, textarea.form-control {
+        border: 1px solid #B38C00;
+        border-radius: 8px;
+    }
+
+    select.form-select:focus,
+    input.form-control:focus,
+    textarea.form-control:focus {
+        box-shadow: 0 0 5px #B38C00;
+        border-color: #B38C00;
+    }
+</style>
+
+
 </head>
 
 <body>

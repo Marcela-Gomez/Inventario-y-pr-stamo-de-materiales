@@ -185,7 +185,6 @@ ORDER BY mes DESC, m.fecha_movimiento DESC";
 $result_prestamos_mes_detalle = $db->consulta($sql_prestamos_mes_detalle);
 
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -199,16 +198,93 @@ $result_prestamos_mes_detalle = $db->consulta($sql_prestamos_mes_detalle);
 <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
 
 <style>
-	body { font-family: Arial, sans-serif; background: #f0f2f5; padding: 20px; }
-	.container { max-width: 1000px; margin: 30px auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-	h2 { text-align: center; color: #333; margin-top: 30px; }
-	table { width: 100%; border-collapse: collapse; margin-bottom: 40px; }
-	th, td { padding: 10px; text-align: left; }
-	th { background: #4f46e5; color: #fff; }
-	tr:nth-child(even) { background: #f9f9f9; }
-	tr:hover { background: #e0e7ff; }
-	button { padding:10px 20px; border:none; border-radius:6px; cursor:pointer; font-weight:bold; margin-right:10px; }
-	button:hover { opacity:0.9; }
+/* ============================================================
+           🎨 PALETA INSTITUCIONAL ITCA-FEPADE
+           ------------------------------------------------------------
+           - Vino Principal:        #8B0000
+           - Rojo Ladrillo:         #9B001F
+           - Dorado/Ocre:           #B38C00
+           - Café Suave:            #6F4E37
+           - Fondo Claro:           #F8F5F0
+           - Texto Oscuro:          #2B2B2B
+============================================================ */
+body {
+    font-family: Arial, sans-serif;
+    background: #F8F5F0; /* Fondo Claro */
+    padding: 20px;
+    color: #2B2B2B; /* Texto Oscuro */
+}
+
+.container {
+    max-width: 1000px;
+    margin: 30px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+h2 {
+    text-align: center;
+    color: #8B0000; /* Vino Principal */
+    margin-top: 30px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 40px;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #C0B283; /* Sutil línea dorada/ocre */
+}
+
+th {
+    background: #9B001F; /* Rojo Ladrillo */
+    color: #F8F5F0; /* Fondo Claro para contraste */
+}
+
+tr:nth-child(even) {
+    background: #F8F5F0; /* Fondo Claro */
+}
+
+tr:hover {
+    background: #B38C00; /* Dorado/Ocre */
+    color: #fff;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-right: 10px;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+/* Botones específicos usando la paleta */
+button.pdf {
+    background: #8B0000; /* Vino Principal */
+    color: #F8F5F0;
+}
+
+button.excel-dev {
+    background: #B38C00; /* Dorado/Ocre */
+    color: #2B2B2B;
+}
+
+button.excel-6meses {
+    background: #6F4E37; /* Café Suave */
+    color: #F8F5F0;
+}
 </style>
 </head>
 <body>
@@ -217,15 +293,15 @@ $result_prestamos_mes_detalle = $db->consulta($sql_prestamos_mes_detalle);
 
 	<!-- Botones de descarga -->
 	<div class="container" style="text-align:right;">
-		<button onclick="generatePDF('reporte-movimientos','Reporte_Movimientos_Mensuales.pdf')" style="background:#ef4444; color:white;">
+		<button class="pdf" onclick="generatePDF('reporte-movimientos','Reporte_Movimientos_Mensuales.pdf')">
 			Descargar PDF
 		</button>
 
-		<button onclick="exportToExcel('tabla-dev-mensuales','Devoluciones_Mensuales.xlsx')" style="background:#3b82f6; color:white;">
+		<button class="excel-dev" onclick="exportToExcel('tabla-dev-mensuales','Devoluciones_Mensuales.xlsx')">
 			Descargar Excel Devoluciones Mensuales
 		</button>
 
-		<button onclick="exportToExcel('tabla-ultimos-6-meses','Movimientos_6Meses.xlsx')" style="background:#10b981; color:white;">
+		<button class="excel-6meses" onclick="exportToExcel('tabla-ultimos-6-meses','Movimientos_6Meses.xlsx')">
 			Descargar Excel Últimos 6 Meses
 		</button>
 	</div>
@@ -313,7 +389,9 @@ $result_prestamos_mes_detalle = $db->consulta($sql_prestamos_mes_detalle);
 			<?php endif; ?>
 		</tbody>
 	</table>
-	<button onclick="exportToExcel('tabla-devoluciones-mes','Devoluciones_Por_Mes.xlsx')" style="background:#3b82f6;color:white;">Descargar Excel</button>
+	<button class="excel-dev" onclick="exportToExcel('tabla-devoluciones-mes','Devoluciones_Por_Mes.xlsx')">
+        Descargar Excel
+    </button>
 </div>
 
 <!-- 🔹 Tabla: Préstamos por mes -->
@@ -353,7 +431,9 @@ $result_prestamos_mes_detalle = $db->consulta($sql_prestamos_mes_detalle);
 			<?php endif; ?>
 		</tbody>
 	</table>
-	<button onclick="exportToExcel('tabla-prestamos-mes','Prestamos_Por_Mes.xlsx')" style="background:#10b981;color:white;">Descargar Excel</button>
+	<button class="excel-6meses" onclick="exportToExcel('tabla-prestamos-mes','Prestamos_Por_Mes.xlsx')">
+        Descargar Excel
+    </button>
 </div>
 
 	<div class="container">

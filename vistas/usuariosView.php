@@ -49,54 +49,118 @@ $rol = htmlspecialchars($usuarioSesion['rol']);
     <meta charset="UTF-8">
     <title>Gestión de Usuarios</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    
     <style>
-        body {
-            background-color: #f4f6f9;
-        }
+    /* ============================================================
+       🎨 PALETA INSTITUCIONAL ITCA-FEPADE
+       ------------------------------------------------------------
+       - Vino Principal:        #8B0000
+       - Rojo Ladrillo:         #9B001F
+       - Dorado/Ocre:           #B38C00
+       - Café Suave:            #6F4E37
+       - Fondo Claro:           #F8F5F0
+       - Texto Oscuro:          #2B2B2B
+    ============================================================ */
 
-        .card {
-            border-radius: 12px;
-            position: relative;
-        }
+    body {
+        background-color: #F8F5F0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #2B2B2B;
+    }
 
-        table {
-            border-radius: 10px;
-            overflow: hidden;
-        }
+    .card {
+        border-radius: 12px;
+        position: relative;
+        border-top: 5px solid #8B0000; /* Toque institucional */
+        background-color: #fff;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        padding: 2rem;
+    }
 
-        th {
-            background-color: #007bff;
-            color: white;
-        }
+    h2 {
+        color: #8B0000;
+        font-weight: bold;
+    }
 
-        .btn-editar {
-            background-color: #ffc107;
-            color: #000;
-            border: none;
-        }
+    p {
+        color: #2B2B2B;
+    }
 
-        .btn-editar:hover {
-            background-color: #e0a800;
-            color: white;
-        }
+    table {
+        border-radius: 10px;
+        overflow: hidden;
+        border: 1px solid #6F4E37;
+    }
 
-        .btn-eliminar {
-            background-color: #dc3545;
-            color: #fff;
-            border: none;
-        }
+    th {
+        background-color: #8B0000;
+        color: #F8F5F0;
+        text-transform: uppercase;
+    }
 
-        .btn-eliminar:hover {
-            background-color: #bb2d3b;
-        }
+    .btn-agregar {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background-color: #B38C00; /* Dorado/Ocre */
+        color: #fff;
+        border: 1px solid #6F4E37;
+        transition: 0.3s;
+    }
 
-        /* 🔹 Botón flotante en esquina superior derecha */
-        .btn-agregar {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-        }
-    </style>
+    .btn-agregar:hover {
+        background-color: #6F4E37; /* Café Suave */
+        border-color: #B38C00;
+        color: #fff;
+    }
+
+    .btn-editar {
+        background-color: #B38C00; /* Dorado/Ocre */
+        color: #fff;
+        border: 1px solid #6F4E37;
+        transition: 0.2s;
+    }
+
+    .btn-editar:hover {
+        background-color: #6F4E37; /* Café Suave */
+        border-color: #B38C00;
+        color: #fff;
+    }
+
+    .btn-eliminar {
+        background-color: #9B001F; /* Rojo Ladrillo */
+        color: #fff;
+        border: 1px solid #8B0000;
+        transition: 0.2s;
+    }
+
+    .btn-eliminar:hover {
+        background-color: #8B0000; /* Vino Principal */
+        border-color: #9B001F;
+        color: #fff;
+    }
+
+    .btn-secondary {
+        background-color: #6F4E37; /* Café Suave */
+        color: #fff;
+        border: 1px solid #8B0000;
+    }
+
+    .btn-secondary:hover {
+        background-color: #9B001F; /* Rojo Ladrillo */
+        border-color: #8B0000;
+        color: #fff;
+    }
+
+    .alert {
+        background-color: #F8F5F0;
+        border-color: #B38C00;
+        color: #2B2B2B;
+        font-size: 0.95rem;
+    }
+</style>
+
+
 </head>
 
 <body>
