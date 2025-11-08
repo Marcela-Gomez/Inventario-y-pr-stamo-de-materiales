@@ -8,6 +8,9 @@ class cn
 
         $this->con = new mysqli('localhost', 'root', '', 'inventario1');
     }
+public function getCon() {
+    return $this->con;
+}
 
     public function consulta($sql)
     {

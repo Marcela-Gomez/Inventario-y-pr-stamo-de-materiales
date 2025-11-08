@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($result && mysqli_num_rows($result) > 0) {
                 $user = mysqli_fetch_assoc($result);
 
-                if ($contraseña === $user['contraseña']) {
+if (password_verify($contraseña, $user['contraseña'])) {
                     // ✅ Guardar sesión
                     $_SESSION['usuario'] = [
                         'id' => $user['id_usuario'],
@@ -116,6 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <button type="submit" class="btn btn-primary">Entrar</button>
             </div>
         </form>
+        <a href="recuperar.php" class="d-block text-center mt-3">¿Olvidaste tu contraseña?</a>
     </div>
 </body>
 
