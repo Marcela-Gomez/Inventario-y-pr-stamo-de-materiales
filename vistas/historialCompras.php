@@ -35,7 +35,6 @@ $sql = "
 $compras = $mov->consulta($sql);
 $tiene_compras = ($compras && $compras->num_rows > 0);
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -45,9 +44,21 @@ $tiene_compras = ($compras && $compras->num_rows > 0);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
     <style>
+        /* ============================================================
+           🎨 PALETA INSTITUCIONAL ITCA-FEPADE
+           ------------------------------------------------------------
+           - Vino Principal:        #8B0000
+           - Rojo Ladrillo:         #9B001F
+           - Dorado/Ocre:           #B38C00
+           - Café Suave:            #6F4E37
+           - Fondo Claro:           #F8F5F0
+           - Texto Oscuro:          #2B2B2B
+        ============================================================ */
+
         body {
-            background-color: #f4f6f9;
+            background-color: #F8F5F0; /* Fondo Claro */
             font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            color: #2B2B2B; /* Texto Oscuro */
         }
 
         .card {
@@ -60,29 +71,40 @@ $tiene_compras = ($compras && $compras->num_rows > 0);
 
         h2 {
             font-weight: 700;
-            color: #2c3e50;
+            color: #8B0000; /* Vino Principal */
         }
 
         .table th {
-            background-color: #198754;
-            color: white;
+            background-color: #9B001F; /* Rojo Ladrillo */
+            color: #F8F5F0; /* Fondo Claro */
+        }
+
+        .table td .badge {
+            background-color: #B38C00; /* Dorado/Ocre para cantidades */
+            color: #2B2B2B;
         }
 
         .btn-volver {
-            background-color: #6c757d;
-            color: white;
+            background-color: #6F4E37; /* Café Suave */
+            color: #F8F5F0;
             border-radius: 8px;
             padding: 10px 20px;
             font-weight: 500;
         }
 
         .btn-volver:hover {
-            background-color: #5c636a;
-            color: white;
+            background-color: #5a3d2d;
+            color: #F8F5F0;
         }
 
         .badge-compra {
-            background-color: #198754;
+            background-color: #8B0000; /* Vino Principal */
+            color: #F8F5F0;
+        }
+
+        .badge-prestamo {
+            background-color: #3b82f6; /* Azul para préstamos (opcional) */
+            color: #F8F5F0;
         }
 
         .empty {
@@ -100,7 +122,7 @@ $tiene_compras = ($compras && $compras->num_rows > 0);
                 <p class="text-muted mb-1">
                     Bienvenido <strong><?= $nombre ?></strong> (<?= $nombreUsuario ?>)
                 </p>
-                <span class="badge bg-success"><?= $rol ?></span>
+                <span class="badge badge-compra"><?= $rol ?></span>
             </div>
 
             <?php if ($tiene_compras): ?>
@@ -121,11 +143,10 @@ $tiene_compras = ($compras && $compras->num_rows > 0);
                                 <tr>
                                     <td><?= htmlspecialchars($row['id_movimiento']) ?></td>
                                     <td><?= htmlspecialchars($row['nombre_producto']) ?></td>
-                                    <td><span class="badge bg-success"><?= htmlspecialchars($row['cantidad']) ?></span></td>
+                                    <td><span class="badge"><?= htmlspecialchars($row['cantidad']) ?></span></td>
                                     <td><?= htmlspecialchars($row['observacion'] ?: '—') ?></td>
                                     <td>
-                                        <span
-                                            class="badge <?= $row['tipo_movimiento'] === 'Compra' ? 'bg-success' : 'bg-primary' ?>">
+                                        <span class="badge <?= $row['tipo_movimiento'] === 'Compra' ? 'badge-compra' : 'badge-prestamo' ?>">
                                             <?= htmlspecialchars($row['tipo_movimiento']) ?>
                                         </span>
                                     </td>

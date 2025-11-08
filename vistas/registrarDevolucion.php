@@ -62,45 +62,85 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <title>Registrar Devolución</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    
     <style>
-        body {
-            background-color: #f8f9fa;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+    /* ============================================================
+       🎨 PALETA INSTITUCIONAL ITCA-FEPADE
+       ------------------------------------------------------------
+       - Vino Principal:        #8B0000
+       - Rojo Ladrillo:         #9B001F
+       - Dorado/Ocre:           #B38C00
+       - Café Suave:            #6F4E37
+       - Fondo Claro:           #F8F5F0
+       - Texto Oscuro:          #2B2B2B
+    ============================================================ */
 
-        .card {
-            max-width: 600px;
-            margin: 50px auto;
-            border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-        }
+    body {
+        background-color: #F8F5F0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #2B2B2B;
+    }
 
-        h3 {
-            font-weight: bold;
-            color: #343a40;
-        }
+    .card {
+        max-width: 600px;
+        margin: 50px auto;
+        border-radius: 15px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        padding: 2rem;
+        border-top: 5px solid #8B0000; /* Toque institucional */
+        background-color: #fff;
+    }
 
-        .btn-guardar {
-            background-color: #198754;
-            color: #fff;
-            font-weight: 500;
-            transition: 0.2s;
-        }
+    h3 {
+        font-weight: bold;
+        color: #8B0000;
+    }
 
-        .btn-guardar:hover {
-            background-color: #157347;
-        }
+    p {
+        color: #2B2B2B;
+    }
 
-        .btn-volver {
-            background-color: #6c757d;
-            color: #fff;
-            transition: 0.2s;
-        }
+    .btn-guardar {
+        background-color: #B38C00; /* Dorado/Ocre */
+        color: #fff;
+        font-weight: 500;
+        transition: 0.2s;
+        border: 1px solid #6F4E37;
+    }
 
-        .btn-volver:hover {
-            background-color: #5a6268;
-        }
-    </style>
+    .btn-guardar:hover {
+        background-color: #6F4E37; /* Café Suave */
+        border-color: #B38C00;
+        color: #fff;
+    }
+
+    .btn-volver {
+        background-color: #6F4E37; /* Café Suave */
+        color: #fff;
+        transition: 0.2s;
+        border: 1px solid #8B0000;
+    }
+
+    .btn-volver:hover {
+        background-color: #9B001F; /* Rojo Ladrillo */
+        border-color: #8B0000;
+        color: #fff;
+    }
+
+    select.form-select, input.form-control, textarea.form-control {
+        border: 1px solid #B38C00;
+        border-radius: 8px;
+    }
+
+    select.form-select:focus,
+    input.form-control:focus,
+    textarea.form-control:focus {
+        box-shadow: 0 0 5px #B38C00;
+        border-color: #B38C00;
+    }
+</style>
+
+
 </head>
 
 <body>

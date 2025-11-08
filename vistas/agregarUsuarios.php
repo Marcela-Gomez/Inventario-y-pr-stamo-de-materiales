@@ -42,7 +42,6 @@ $resultado = $usuarioModel->createUsuario([$nombre, $usuario, $contraseña_hash,
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -50,9 +49,23 @@ $resultado = $usuarioModel->createUsuario([$nombre, $usuario, $contraseña_hash,
     <meta charset="UTF-8">
     <title>Agregar Usuario</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+
     <style>
+        /* ============================================================
+           🎨 PALETA ITCA-FEPADE
+           ------------------------------------------------------------
+           - Vino Principal:        #8B0000
+           - Rojo Ladrillo:         #9B001F
+           - Dorado/Ocre:           #B38C00
+           - Café Suave:            #6F4E37
+           - Fondo Claro:           #F8F5F0
+           - Texto Oscuro:          #2B2B2B
+           ============================================================ */
+
         body {
-            background-color: #f4f6f9;
+            background-color: #F8F5F0;
+            color: #2B2B2B;
+            font-family: "Segoe UI", sans-serif;
         }
 
         .card {
@@ -60,42 +73,75 @@ $resultado = $usuarioModel->createUsuario([$nombre, $usuario, $contraseña_hash,
             max-width: 600px;
             margin: 60px auto;
             padding: 30px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            border-left: 5px solid #9B001F;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
         }
 
         h2 {
-            color: #007bff;
+            color: #8B0000;
             font-weight: bold;
+            text-align: center;
         }
 
+        .form-label {
+            font-weight: 600;
+            color: #2B2B2B;
+        }
+
+        .form-control,
+        .form-select {
+            border: 1px solid #CBBFAD;
+            border-radius: 8px;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: #B38C00;
+            box-shadow: 0 0 6px rgba(179, 140, 0, 0.4);
+        }
+
+        /* Botón Guardar (Primario - Vino) */
         .btn-primary {
-            background-color: #007bff;
+            background-color: #9B001F;
             border: none;
+            transition: background-color 0.3s ease;
         }
 
         .btn-primary:hover {
-            background-color: #0056b3;
+            background-color: #8B0000;
         }
 
+        /* Botón Volver (Secundario - Café Suave) */
         .btn-secondary {
-            background-color: #6c757d;
+            background-color: #6F4E37;
+            border: none;
+            transition: background-color 0.3s ease;
         }
 
         .btn-secondary:hover {
-            background-color: #545b62;
+            background-color: #5C3E2B;
         }
 
+        /* Alertas */
+        .alert-warning {
+            background-color: #fff3cd;
+            color: #8B0000;
+            border-color: #B38C00;
+        }
+
+        /* Campos inválidos */
         .is-invalid {
-            border-color: #dc3545;
+            border-color: #9B001F;
         }
 
         .invalid-feedback {
             display: none;
-            color: #dc3545;
+            color: #9B001F;
         }
 
-        input.is-invalid+.invalid-feedback,
-        select.is-invalid+.invalid-feedback {
+        input.is-invalid + .invalid-feedback,
+        select.is-invalid + .invalid-feedback {
             display: block;
         }
     </style>
@@ -103,7 +149,7 @@ $resultado = $usuarioModel->createUsuario([$nombre, $usuario, $contraseña_hash,
 
 <body>
     <div class="card">
-        <h2 class="text-center mb-4">➕ Agregar Nuevo Usuario</h2>
+        <h2 class="mb-4">➕ Agregar Nuevo Usuario</h2>
 
         <?php if ($mensaje): ?>
             <div class="alert alert-warning text-center"><?= htmlspecialchars($mensaje) ?></div>

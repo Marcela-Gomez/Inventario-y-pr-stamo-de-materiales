@@ -27,9 +27,20 @@ $tiene_productos = ($productos && mysqli_num_rows($productos) > 0);
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <style>
+        /* ============================================================
+           🎨 PALETA ITCA-FEPADE
+           ------------------------------------------------------------
+           - Vino Principal:        #8B0000
+           - Rojo Ladrillo:         #9B001F
+           - Dorado/Ocre:           #B38C00
+           - Café Suave:            #6F4E37
+           - Fondo Claro:           #F8F5F0
+           - Texto Oscuro:          #2B2B2B
+           ============================================================ */
         body {
-            background-color: #eef2f7;
+            background-color: #F8F5F0;
             font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            color: #2B2B2B;
         }
 
         .container {
@@ -51,11 +62,11 @@ $tiene_productos = ($productos && mysqli_num_rows($productos) > 0);
 
         h2 {
             font-weight: 700;
-            color: #212529;
+            color: #8B0000;
         }
 
         .btn-volver {
-            background-color: #6c757d;
+            background-color: #6F4E37;
             color: white;
             border-radius: 8px;
             padding: 10px 25px;
@@ -64,21 +75,38 @@ $tiene_productos = ($productos && mysqli_num_rows($productos) > 0);
         }
 
         .btn-volver:hover {
-            background-color: #5a6268;
+            background-color: #5a3d2e;
             color: white;
         }
 
         .table thead {
-            background-color: #0d6efd;
+            background-color: #8B0000;
             color: #fff;
         }
 
         .table tbody tr:hover {
-            background-color: #f8f9fa;
+            background-color: #F8F5F0;
         }
 
         .badge {
             font-size: 0.9rem;
+        }
+
+        .badge.bg-success {
+            background-color: #B38C00 !important;
+        }
+
+        .badge.bg-warning.text-dark {
+            background-color: #9B001F !important;
+            color: white !important;
+        }
+
+        .badge.bg-secondary {
+            background-color: #6F4E37 !important;
+        }
+
+        .text-muted, .text-secondary {
+            color: #6F4E37 !important;
         }
     </style>
 </head>

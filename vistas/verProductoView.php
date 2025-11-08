@@ -27,96 +27,134 @@ $tiene_productos = ($productos && mysqli_num_rows($productos) > 0);
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
     <style>
-        body {
-            background-color: #f8f9fa;
-            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        }
+    /* ============================================================
+       🎨 PALETA INSTITUCIONAL ITCA-FEPADE
+       ------------------------------------------------------------
+       - Vino Principal:        #8B0000
+       - Rojo Ladrillo:         #9B001F
+       - Dorado/Ocre:           #B38C00
+       - Café Suave:            #6F4E37
+       - Fondo Claro:           #F8F5F0
+       - Texto Oscuro:          #2B2B2B
+    ============================================================ */
 
-        .card {
-            border: none;
-            border-radius: 20px;
-            padding: 2rem;
-        }
+    body {
+        background-color: #F8F5F0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        color: #2B2B2B;
+    }
 
-        h2 {
-            font-weight: 600;
-            color: #343a40;
-        }
+    .card {
+        border: none;
+        border-radius: 20px;
+        padding: 2rem;
+        background-color: #fff;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        border-top: 5px solid #8B0000; /* toque institucional */
+    }
 
-        table th,
-        table td {
-            vertical-align: middle !important;
-        }
+    h2 {
+        font-weight: 600;
+        color: #8B0000;
+    }
 
-        .badge {
-            font-size: 0.9rem;
-        }
+    table th,
+    table td {
+        vertical-align: middle !important;
+        border-color: #6F4E37;
+    }
 
-        .btn-add {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background-color: #198754;
-            color: #fff;
-            border: none;
-            padding: 10px 18px;
-            border-radius: 8px;
-            font-weight: 500;
-            transition: all 0.2s ease-in-out;
-        }
+    thead.table-success {
+        background-color: #8B0000; /* encabezado en Vino Principal */
+        color: #F8F5F0;
+    }
 
-        .btn-add:hover {
-            background-color: #157347;
-            color: #fff;
-            transform: translateY(-1px);
-        }
+    .badge.bg-success {
+        background-color: #198754;
+    }
 
-        .header-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-        }
+    .badge.bg-warning.text-dark {
+        background-color: #B38C00; /* Dorado/Ocre */
+        color: #2B2B2B;
+    }
 
-        .btn-editar {
-            background-color: #0d6efd;
-            color: white;
-            border-radius: 8px;
-            padding: 6px 12px;
-        }
+    .badge.bg-secondary {
+        background-color: #6F4E37; /* Café Suave */
+    }
 
-        .btn-editar:hover {
-            background-color: #0b5ed7;
-            color: white;
-        }
+    .btn-add {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background-color: #8B0000;
+        color: #fff;
+        border: none;
+        padding: 10px 18px;
+        border-radius: 8px;
+        font-weight: 500;
+        transition: all 0.2s ease-in-out;
+    }
 
-        .btn-eliminar {
-            background-color: #dc3545;
-            color: white;
-            border-radius: 8px;
-            padding: 6px 12px;
-        }
+    .btn-add:hover {
+        background-color: #9B001F; /* Rojo Ladrillo */
+        transform: translateY(-1px);
+    }
 
-        .btn-eliminar:hover {
-            background-color: #bb2d3b;
-            color: white;
-        }
+    .btn-editar {
+        background-color: #B38C00; /* Dorado/Ocre */
+        color: #2B2B2B;
+        border-radius: 8px;
+        padding: 6px 12px;
+    }
 
-        /* Estilo del botón volver */
-        .btn-volver {
-            background-color: #6c757d;
-            color: white;
-            border-radius: 8px;
-            padding: 10px 20px;
-            font-weight: 500;
-            transition: all 0.2s ease-in-out;
-        }
+    .btn-editar:hover {
+        background-color: #8B0000; /* Vino Principal */
+        color: #fff;
+    }
 
-        .btn-volver:hover {
-            background-color: #5c636a;
-            color: white;
-        }
-    </style>
+    .btn-eliminar {
+        background-color: #9B001F; /* Rojo Ladrillo */
+        color: #fff;
+        border-radius: 8px;
+        padding: 6px 12px;
+    }
+
+    .btn-eliminar:hover {
+        background-color: #8B0000; /* Vino Principal */
+    }
+
+    .btn-volver {
+        background-color: #6F4E37; /* Café Suave */
+        color: #fff;
+        border-radius: 8px;
+        padding: 10px 20px;
+        font-weight: 500;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .btn-volver:hover {
+        background-color: #8B0000; /* Vino Principal */
+        color: #fff;
+    }
+
+    input.form-control {
+        border: 1px solid #6F4E37;
+    }
+
+    input.form-control:focus {
+        border-color: #8B0000;
+        box-shadow: 0 0 5px rgba(139,0,0,0.5);
+    }
+
+    .alert {
+        background-color: #F8F5F0;
+        border-color: #B38C00;
+        color: #2B2B2B;
+        font-size: 0.95rem;
+    }
+</style>
+
+    
 </head>
 
 <body>

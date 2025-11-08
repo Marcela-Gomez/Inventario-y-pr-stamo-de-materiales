@@ -47,57 +47,110 @@ $devoluciones = $mov->consulta("
     <title>Panel del Prestatario</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body {
-            background-color: #f4f6f9;
-            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        }
+    /* ============================================================
+       🎨 PALETA INSTITUCIONAL ITCA-FEPADE
+       ------------------------------------------------------------
+       - Vino Principal:        #8B0000
+       - Rojo Ladrillo:         #9B001F
+       - Dorado/Ocre:           #B38C00
+       - Café Suave:            #6F4E37
+       - Fondo Claro:           #F8F5F0
+       - Texto Oscuro:          #2B2B2B
+    ============================================================ */
 
-        .card {
-            border-radius: 15px;
-            background: #fff;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
-            padding: 2rem;
-        }
+    body {
+        background-color: #F8F5F0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        color: #2B2B2B;
+    }
 
-        h1 {
-            font-weight: bold;
-            color: #333;
-        }
+    .card {
+        border-radius: 15px;
+        background: #fff;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        padding: 2rem;
+        border-top: 5px solid #8B0000; /* Toque institucional */
+    }
 
-        .btn-lg {
-            border-radius: 10px;
-            font-weight: 500;
-        }
+    h1, h4 {
+        font-weight: bold;
+        color: #8B0000;
+    }
 
-        table th {
-            background-color: #0d6efd;
-            color: white;
-        }
+    p, td {
+        color: #2B2B2B;
+    }
 
-        .alert {
-            font-size: 0.9rem;
-        }
+    .btn-lg {
+        border-radius: 10px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
 
-        .btn-verde {
-            background-color: #198754;
-            color: white;
-        }
+    .btn-verde {
+        background-color: #B38C00; /* Dorado/Ocre */
+        color: #fff;
+        border-color: #6F4E37;
+    }
 
-        .btn-verde:hover {
-            background-color: #157347;
-            color: white;
-        }
+    .btn-verde:hover {
+        background-color: #6F4E37; /* Café Suave */
+        border-color: #B38C00;
+        color: #fff;
+    }
 
-        .btn-gris {
-            background-color: #6c757d;
-            color: white;
-        }
+    .btn-primary {
+        background-color: #8B0000; /* Vino Principal */
+        border-color: #9B001F; /* Rojo Ladrillo */
+    }
 
-        .btn-gris:hover {
-            background-color: #5a6268;
-            color: white;
-        }
-    </style>
+    .btn-primary:hover {
+        background-color: #9B001F;
+        border-color: #8B0000;
+    }
+
+    .btn-gris {
+        background-color: #6F4E37; /* Café Suave */
+        color: #fff;
+    }
+
+    .btn-gris:hover {
+        background-color: #5a3f2d;
+        color: #fff;
+    }
+
+    table {
+        background-color: #fff;
+        border: 1px solid #6F4E37;
+    }
+
+    th {
+        background-color: #8B0000;
+        color: #F8F5F0;
+        text-transform: uppercase;
+    }
+
+    input.form-control {
+        border: 1px solid #B38C00;
+        border-radius: 8px;
+    }
+
+    input.form-control:focus {
+        box-shadow: 0 0 5px #B38C00;
+        border-color: #B38C00;
+    }
+
+    .alert-info, .alert-warning {
+        background-color: #F8F5F0;
+        border-color: #B38C00;
+        color: #2B2B2B;
+    }
+
+    .alert-warning {
+        border-color: #9B001F;
+    }
+</style>
+
 </head>
 
 <body>

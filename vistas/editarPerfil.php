@@ -64,40 +64,66 @@ $preguntas = $qPreg->get_result();
 <head>
 <title>Editar Perfil</title>
 <style>
+    /* ============================================================
+       🎨 PALETA ITCA-FEPADE
+       ------------------------------------------------------------
+       - Vino Principal:        #8B0000
+       - Rojo Ladrillo:         #9B001F
+       - Dorado/Ocre:           #B38C00
+       - Café Suave:            #6F4E37
+       - Fondo Claro:           #F8F5F0
+       - Texto Oscuro:          #2B2B2B
+       ============================================================ */
     body{
-        font-family: Arial;
-        background: #f4f4f4;
+        font-family: Arial, sans-serif;
+        background: #F8F5F0;
         padding: 20px;
+        color: #2B2B2B;
     }
     .card{
         background:white;
         padding:20px;
         width:400px;
-        margin:auto;
+        margin:auto 0 auto 0;
         border-radius:10px;
-        box-shadow:0 0 10px rgba(0,0,0,0.2)
+        box-shadow:0 0 10px rgba(0,0,0,0.2);
+        margin-bottom: 30px;
     }
     input{
         width:100%;
         padding:8px;
         margin:5px 0;
         border-radius:5px;
-        border:1px solid #aaa;
+        border:1px solid #B38C00;
+    }
+    input:focus {
+        border-color: #8B0000;
+        box-shadow: 0 0 0 3px rgba(139, 0, 0, 0.1);
+        outline: none;
     }
     button{
-        background:#1a73e8;
+        background:#8B0000;
         color:white;
         padding:10px;
         border:none;
         border-radius:5px;
         cursor:pointer;
         width:100%;
+        font-weight: 500;
+        transition: 0.2s;
     }
     button:hover{
-        background:#0f51a1;
+        background:#9B001F;
     }
     h2,h3{
         text-align:center;
+        color: #8B0000;
+    }
+    .text-success {
+        color: #B38C00 !important;
+    }
+    label {
+        font-weight: 500;
     }
 </style>
 </head>
@@ -107,25 +133,23 @@ $preguntas = $qPreg->get_result();
 <h2>Editar Perfil</h2>
 
 <?php if(isset($_GET['msg'])): ?>
-<p style="color:green;text-align:center;"><?php echo $_GET['msg']; ?></p>
+<p class="text-success"><?php echo $_GET['msg']; ?></p>
 <?php endif; ?>
 
 <form method="POST">
     <label>Nombre:</label>
-    <input type="text" name="nombre" value="<?php echo $usuario['nombre']; ?>"> 
+    <input type="text" name="nombre" value="<?php echo htmlspecialchars($usuario['nombre']); ?>"> 
 
     <label>Usuario:</label>
-    <input type="text" name="nombre_usuario" value="<?php echo $usuario['nombre_usuario']; ?>">
+    <input type="text" name="nombre_usuario" value="<?php echo htmlspecialchars($usuario['nombre_usuario']); ?>">
 
     <label>Nueva Contraseña (opcional):</label>
-    <input type="password" name=" placeholder="Dejar vacío para no cambiar">
+    <input type="password" name="password" placeholder="Dejar vacío para no cambiar">
 
     <br><br>
     <button type="submit" name="actualizar_perfil">Actualizar</button>
 </form>
 </div>
-
-<br>
 
 <div class="card">
 <h3>Preguntas de Seguridad</h3>
@@ -147,7 +171,7 @@ $preguntas = $qPreg->get_result();
     <input type="hidden" name="id_pregunta" value="<?php echo $p['id']; ?>">
     
     <label>Pregunta:</label>
-    <input type="text" name="pregunta1" value="<?php echo $p['pregunta']; ?>">
+    <input type="text" name="pregunta1" value="<?php echo htmlspecialchars($p['pregunta']); ?>">
 
     <label>Nueva Respuesta:</label>
     <input type="text" name="respuesta1">
@@ -174,5 +198,4 @@ if(isset($_POST['editar_pregunta'])){
     header("Location: editarPerfil.php?msg=Pregunta actualizada");
 }
 ?>
-
 </html>

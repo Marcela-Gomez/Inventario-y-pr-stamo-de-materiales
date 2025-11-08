@@ -56,7 +56,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -65,21 +64,146 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Agregar Producto</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <style>
+        /* ============================================================
+           🎨 PALETA ITCA-FEPADE
+           ------------------------------------------------------------
+           - Vino Principal:        #8B0000
+           - Rojo Ladrillo:         #9B001F
+           - Dorado/Ocre:           #B38C00
+           - Café Suave:            #6F4E37
+           - Fondo Claro:           #F8F5F0
+           - Texto Oscuro:          #2B2B2B
+           ============================================================ */
+
+        body {
+            background-color: #F8F5F0;
+            font-family: 'Segoe UI', sans-serif;
+            color: #2B2B2B;
+        }
+
+        .container {
+            position: relative;
+            max-width: 850px;
+        }
+
         .top-right-btn {
             position: absolute;
-            top: 15px;
-            right: 15px;
+            top: 20px;
+            right: 20px;
+            background-color: #B38C00;
+            border: none;
+            color: #fff;
+            font-weight: 600;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .top-right-btn:hover {
+            background-color: #8C6F00;
+            transform: translateY(-2px);
+        }
+
+        .card {
+            border-radius: 18px;
+            border-left: 8px solid #8B0000;
+            border-top: 3px solid #B38C00;
+            background-color: #fff;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+            padding: 35px;
+            margin-top: 80px;
+        }
+
+        h2 {
+            color: #8B0000;
+            font-weight: 700;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        hr {
+            border: 0;
+            height: 2px;
+            background: linear-gradient(to right, #8B0000, #B38C00);
+            margin-bottom: 25px;
+        }
+
+        label {
+            font-weight: 600;
+            color: #6F4E37;
+        }
+
+        .form-control, .form-select {
+            border: 2px solid #E0CDA9;
+            border-radius: 10px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #B38C00;
+            box-shadow: 0 0 6px rgba(179, 140, 0, 0.4);
+        }
+
+        .form-check-label {
+            color: #6F4E37;
+            font-weight: 500;
+        }
+
+        /* ---------------------
+           BOTONES PERSONALIZADOS
+           --------------------- */
+        .btn-success {
+            background-color: #B38C00;
+            border: none;
+            font-weight: 600;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            color: #fff;
+        }
+
+        .btn-success:hover {
+            background-color: #8C6F00;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background-color: #6F4E37;
+            border: none;
+            font-weight: 600;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            color: #fff;
+        }
+
+        .btn-secondary:hover {
+            background-color: #523828;
+            transform: translateY(-1px);
+        }
+
+        .alert-danger {
+            background-color: #FFE9E9;
+            border: 1px solid #FFB3B3;
+            color: #8B0000;
+            border-radius: 10px;
+        }
+
+        .text-center button,
+        .text-center a {
+            padding: 10px 20px;
+            font-size: 1rem;
         }
     </style>
 </head>
 
-<body class="bg-light">
+<body>
     <div class="container mt-5 position-relative">
         <!-- 🔹 Botón arriba a la derecha -->
-        <a href="verProductoView.php" class="btn btn-info top-right-btn">👁 Ver Productos</a>
+        <a href="verProductoView.php" class="btn top-right-btn">👁 Ver Productos</a>
 
         <div class="card shadow p-4">
-            <h2 class="text-center mb-4">Agregar Producto</h2>
+            <h2>Agregar Producto</h2>
+            <hr>
 
             <!-- Mostrar errores del backend -->
             <?php if (!empty($errores)): ?>
@@ -147,8 +271,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
 
                 <div class="text-center">
-                    <button type="submit" class="btn btn-success">Guardar Producto</button>
-                    <a href="verProductoView.php" class="btn btn-secondary">Cancelar</a>
+                    <button type="submit" class="btn btn-success">💾 Guardar Producto</button>
+                    <a href="verProductoView.php" class="btn btn-secondary">⬅️ Cancelar</a>
                 </div>
             </form>
         </div>

@@ -79,19 +79,76 @@ if (password_verify($contraseña, $user['contraseña'])) {
     <title>Login - Inventario</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <style>
-        body {
-            background: #f2f2f2;
-        }
+    /* ============================================================
+       🎨 PALETA ITCA-FEPADE
+       ------------------------------------------------------------
+       - Vino Principal:  #8B0000
+       - Rojo Ladrillo:   #9B001F
+       - Dorado/Ocre:     #B38C00
+       - Café Suave:      #6F4E37
+       - Fondo Claro:     #F8F5F0
+       - Texto Oscuro:    #2B2B2B
+    ============================================================ */
 
-        .login-card {
-            max-width: 400px;
-            margin: 100px auto;
-            padding: 30px;
-            border-radius: 10px;
-            background: #fff;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-        }
-    </style>
+    body {
+        background-color: #F8F5F0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .login-card {
+        max-width: 400px;
+        margin: 100px auto;
+        padding: 30px;
+        border-radius: 15px;
+        background: #fff;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        border-top: 5px solid #8B0000; /* Vino Principal */
+    }
+
+    h3 {
+        text-align: center;
+        font-weight: 600;
+        color: #8B0000; /* Vino Principal */
+    }
+
+    .form-control {
+        border: 1px solid #6F4E37; /* Café Suave */
+    }
+
+    .form-control:focus {
+        border-color: #8B0000;
+        box-shadow: 0 0 5px rgba(139, 0, 0, 0.5);
+    }
+
+    .btn-primary {
+        background-color: #8B0000; /* Vino Principal */
+        border: none;
+        font-weight: 500;
+        transition: 0.2s;
+    }
+
+    .btn-primary:hover {
+        background-color: #9B001F; /* Rojo Ladrillo */
+    }
+
+    .alert-danger {
+        background-color: #F8F5F0;
+        border: 1px solid #9B001F;
+        color: #2B2B2B;
+        font-size: 0.95rem;
+    }
+
+    a {
+        color: #8B0000;
+        text-decoration: none;
+    }
+
+    a:hover {
+        color: #9B001F;
+        text-decoration: underline;
+    }
+</style>
+
 </head>
 
 <body>

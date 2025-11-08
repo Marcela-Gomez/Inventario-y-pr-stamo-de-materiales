@@ -35,20 +35,76 @@ $prestamos = $mov->consulta("
     <meta charset="UTF-8">
     <title>Mis Préstamos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
     <style>
-        body {
-            background-color: #f4f6f9;
-        }
+    /* ============================================================
+       🎨 PALETA INSTITUCIONAL ITCA-FEPADE
+       ------------------------------------------------------------
+       - Vino Principal:        #8B0000
+       - Rojo Ladrillo:         #9B001F
+       - Dorado/Ocre:           #B38C00
+       - Café Suave:            #6F4E37
+       - Fondo Claro:           #F8F5F0
+       - Texto Oscuro:          #2B2B2B
+    ============================================================ */
 
-        .card {
-            border-radius: 15px;
-            padding: 2rem;
-        }
+    body {
+        background-color: #F8F5F0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #2B2B2B;
+    }
 
-        h1 {
-            color: #333;
-        }
-    </style>
+    .card {
+        border-radius: 15px;
+        padding: 2rem;
+        border-top: 5px solid #8B0000; /* Toque institucional */
+        background-color: #fff;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    h1 {
+        color: #8B0000;
+        font-weight: bold;
+    }
+
+    p {
+        color: #2B2B2B;
+    }
+
+    table {
+        border-radius: 10px;
+        overflow: hidden;
+        border: 1px solid #6F4E37;
+    }
+
+    th {
+        background-color: #8B0000; /* Vino Principal */
+        color: #F8F5F0;
+        text-transform: uppercase;
+    }
+
+    .btn-secondary {
+        background-color: #6F4E37; /* Café Suave */
+        color: #fff;
+        border: 1px solid #8B0000;
+        transition: 0.2s;
+    }
+
+    .btn-secondary:hover {
+        background-color: #9B001F; /* Rojo Ladrillo */
+        border-color: #8B0000;
+        color: #fff;
+    }
+
+    .alert {
+        background-color: #F8F5F0;
+        border-color: #B38C00;
+        color: #2B2B2B;
+        font-size: 0.95rem;
+    }
+</style>
+
+
 </head>
 
 <body>

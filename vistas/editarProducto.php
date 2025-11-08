@@ -62,52 +62,66 @@ $categorias = $categoriaModel->getCategorias();
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <style>
-        body {
-            background-color: #f4f6f9;
-            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        }
+    body {
+        background-color: #F8F5F0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        color: #2B2B2B;
+    }
 
-        .card {
-            border: none;
-            border-radius: 20px;
-            padding: 2rem;
-            max-width: 800px;
-            margin: 3rem auto;
-        }
+    .card {
+        border: none;
+        border-radius: 20px;
+        padding: 2rem;
+        max-width: 800px;
+        margin: 3rem auto;
+        background-color: white;
+        box-shadow: 0 4px 15px rgba(139, 0, 0, 0.2);
+    }
 
-        h2 {
-            font-weight: 600;
-            color: #343a40;
-            text-align: center;
-            margin-bottom: 1.5rem;
-        }
+    h2 {
+        font-weight: 600;
+        color: #8B0000;
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
 
-        .btn-guardar {
-            background-color: #0d6efd;
-            color: white;
-            font-weight: 500;
-            padding: 10px 20px;
-            border-radius: 8px;
-            transition: 0.2s;
-        }
+    .btn-guardar {
+        background-color: #8B0000;
+        color: white;
+        font-weight: 500;
+        padding: 10px 20px;
+        border-radius: 8px;
+        transition: 0.2s;
+    }
 
-        .btn-guardar:hover {
-            background-color: #0b5ed7;
-        }
+    .btn-guardar:hover {
+        background-color: #9B001F;
+    }
 
-        .btn-cancelar {
-            background-color: #6c757d;
-            color: white;
-            font-weight: 500;
-            border-radius: 8px;
-            padding: 10px 20px;
-            transition: 0.2s;
-        }
+    .btn-cancelar {
+        background-color: #6F4E37;
+        color: white;
+        font-weight: 500;
+        border-radius: 8px;
+        padding: 10px 20px;
+        transition: 0.2s;
+    }
 
-        .btn-cancelar:hover {
-            background-color: #5c636a;
-        }
-    </style>
+    .btn-cancelar:hover {
+        background-color: #5C3B2E;
+    }
+
+    input, textarea, select {
+        border: 1px solid #B38C00;
+    }
+
+    input:focus, textarea:focus, select:focus {
+        border-color: #8B0000;
+        box-shadow: 0 0 0 3px rgba(139, 0, 0, 0.1);
+        outline: none;
+    }
+</style>
+
 </head>
 
 <body>

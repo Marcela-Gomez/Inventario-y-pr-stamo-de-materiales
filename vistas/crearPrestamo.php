@@ -60,9 +60,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Registrar Préstamo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        /* ============================================================
+           🎨 PALETA ITCA-FEPADE
+           ------------------------------------------------------------
+           - Vino Principal:        #8B0000
+           - Rojo Ladrillo:         #9B001F
+           - Dorado/Ocre:           #B38C00
+           - Café Suave:            #6F4E37
+           - Fondo Claro:           #F8F5F0
+           - Texto Oscuro:          #2B2B2B
+           ============================================================ */
         body {
-            background-color: #f4f6f9;
+            background-color: #F8F5F0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #2B2B2B;
         }
 
         .card {
@@ -76,29 +87,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         h2 {
             font-weight: bold;
-            color: #333;
+            color: #8B0000;
             text-align: center;
         }
 
         .btn-verde {
-            background-color: #198754;
+            background-color: #B38C00;
             color: white;
             font-weight: 500;
             transition: 0.2s;
         }
 
         .btn-verde:hover {
-            background-color: #157347;
+            background-color: #9B7600;
         }
 
         .btn-gris {
-            background-color: #6c757d;
+            background-color: #6F4E37;
             color: white;
             transition: 0.2s;
         }
 
         .btn-gris:hover {
-            background-color: #5a6268;
+            background-color: #5a3d2e;
         }
 
         label {
@@ -107,6 +118,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         .alert {
             font-size: 0.95rem;
+        }
+
+        .text-muted {
+            color: #6F4E37 !important;
+        }
+
+        select.form-select,
+        input.form-control,
+        textarea.form-control {
+            border-radius: 8px;
+            border: 1px solid #B38C00;
+        }
+
+        select.form-select:focus,
+        input.form-control:focus,
+        textarea.form-control:focus {
+            border-color: #8B0000;
+            box-shadow: 0 0 0 3px rgba(139, 0, 0, 0.1);
+            outline: none;
         }
     </style>
 </head>
