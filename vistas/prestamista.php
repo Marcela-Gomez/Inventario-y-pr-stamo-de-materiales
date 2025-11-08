@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once(__DIR__ . '/../modelo/addMovimiento.php');
-require_once(__DIR__ . '/../modelo/addProducto.php');
+require_once('../modelo/addMovimiento.php');
+require_once('../modelo/addProducto.php');
 
 // 🔒 Verificar sesión activa y rol "prestamista"
 if (
@@ -76,19 +76,27 @@ $prestamos = $mov->consulta("
     ORDER BY m.fecha_movimiento DESC
 ");
 
+
+
 /* --------------------------------------------------------
    🔍 Consultar historial de devoluciones
 -------------------------------------------------------- */
 $devoluciones = $mov->consulta("
-    SELECT 
+    
+
+SELECT 
         m.id_movimiento, 
+        m.id_producto,
+        u.nombre AS prestatario, 
+        u.id_usuario AS id_prestatario,
         p.nombre_producto, 
         m.cantidad, 
         m.observacion, 
         m.fecha_movimiento
     FROM movimientos m
     INNER JOIN productos p ON m.id_producto = p.id_producto
-    WHERE m.tipo_movimiento = 'Devolucion'
+    INNER JOIN usuarios u ON m.id_prestatario = u.id_usuario
+    WHERE m.tipo_movimiento = 'Prestamo' and m.estado = 'Devuelto'
     ORDER BY m.fecha_movimiento DESC
 ");
 ?>
@@ -151,6 +159,16 @@ $devoluciones = $mov->consulta("
         <!-- 🤝 Préstamos activos -->
         <div class="card shadow-lg p-4 mb-4">
             <h3 class="mb-3 text-center">🤝 Préstamos Activos</h3>
+                                <!-- 🔍 Barra de búsqueda -->
+                    <div class="mb-3 text-end">
+                        <input 
+                            type="text" 
+                            id="filtroPrestamos" 
+                            class="form-control w-50 d-inline" 
+                            placeholder="🔍 Buscar por nombre, producto o fecha..." 
+                            onkeyup="filtrarPrestamos()">
+                    </div>
+
             <?php if ($prestamos && $prestamos->num_rows > 0): ?>
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover align-middle text-center">
@@ -179,7 +197,7 @@ $devoluciones = $mov->consulta("
                                             <input type="hidden" name="cantidad" value="<?= $row['cantidad'] ?>">
                                             <input type="hidden" name="id_prestatario" value="<?= $row['id_prestatario'] ?>">
                                             <button type="submit" class="btn btn-warning btn-sm">
-                                                ↩️ Registrar Devolución
+                                                ↩ Registrar Devolución
                                             </button>
                                         </form>
                                     </td>
@@ -195,14 +213,28 @@ $devoluciones = $mov->consulta("
             <?php endif; ?>
         </div>
 
+
         <!-- 📦 Historial de Devoluciones -->
         <div class="card shadow-lg p-4">
             <h3 class="mb-3 text-center">📦 Historial de Devoluciones</h3>
+                
+                            <!-- 🔍 Barra de búsqueda -->
+                <div class="mb-3 text-end">
+                    <input 
+                        type="text" 
+                        id="filtroDevoluciones" 
+                        class="form-control w-50 d-inline" 
+                        placeholder="🔍 Buscar por prestatario, producto o fecha..." 
+                        onkeyup="filtrarDevoluciones()">
+                </div>
+
+
             <?php if ($devoluciones && $devoluciones->num_rows > 0): ?>
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover align-middle text-center">
                         <thead>
                             <tr>
+                                <th>Prestatario</th>
                                 <th>Producto</th>
                                 <th>Cantidad</th>
                                 <th>Observación</th>
@@ -212,6 +244,7 @@ $devoluciones = $mov->consulta("
                         <tbody>
                             <?php while ($row = $devoluciones->fetch_assoc()): ?>
                                 <tr>
+                                    <td><?= htmlspecialchars($row['prestatario']) ?></td>
                                     <td><?= htmlspecialchars($row['nombre_producto']) ?></td>
                                     <td><?= htmlspecialchars($row['cantidad']) ?></td>
                                     <td><?= htmlspecialchars($row['observacion']) ?></td>
@@ -228,6 +261,57 @@ $devoluciones = $mov->consulta("
             <?php endif; ?>
         </div>
     </div>
+
+    <script>
+function filtrarPrestamos() {
+    const input = document.getElementById("filtroPrestamos");
+    const filtro = input.value.toLowerCase();
+    const tabla = document.querySelector(".table-responsive table");
+    const filas = tabla.getElementsByTagName("tr");
+
+    for (let i = 1; i < filas.length; i++) { // empieza desde 1 para saltar encabezado
+        const celdas = filas[i].getElementsByTagName("td");
+        let coincide = false;
+
+        // Revisa las columnas de prestatario, producto y fecha
+        for (let j of [0, 1, 4]) { // índices: 0=prestatario, 1=producto, 4=fecha
+            const texto = celdas[j]?.textContent?.toLowerCase() || "";
+            if (texto.includes(filtro)) {
+                coincide = true;
+                break;
+            }
+        }
+
+        filas[i].style.display = coincide ? "" : "none";
+    }
+}
+
+
+function filtrarDevoluciones() {
+    const input = document.getElementById("filtroDevoluciones");
+    const filtro = input.value.toLowerCase();
+    const tabla = document.querySelectorAll(".table-responsive table")[1]; // segunda tabla (devoluciones)
+    const filas = tabla.getElementsByTagName("tr");
+
+    for (let i = 1; i < filas.length; i++) { // saltar encabezado
+        const celdas = filas[i].getElementsByTagName("td");
+        let coincide = false;
+
+        // Columnas: 0=prestatario, 1=producto, 4=fecha
+        for (let j of [0, 1, 4]) {
+            const texto = celdas[j]?.textContent?.toLowerCase() || "";
+            if (texto.includes(filtro)) {
+                coincide = true;
+                break;
+            }
+        }
+
+        filas[i].style.display = coincide ? "" : "none";
+    }
+}
+
+</script>
+
 </body>
 
 </html>
