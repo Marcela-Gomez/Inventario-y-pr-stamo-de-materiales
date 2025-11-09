@@ -154,6 +154,54 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 
 <body>
+
+ <!-- ✅ Menú de Navegación -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+
+        <!-- Logo / Título -->
+        <a class="navbar-brand fw-bold" href="prestatario.php">
+            📚 Préstamos
+        </a>
+
+        <!-- Botón hamburguesa -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuPrestamo">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Items del menú -->
+        <div class="collapse navbar-collapse" id="menuPrestamo">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
+                <li class="nav-item">
+                    <a href="crearPrestamo.php" class="nav-link btn btn-verde text-white mx-2 px-3">
+                        ➕ Crear Préstamo
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="registrarSalida.php" class="nav-link btn btn-verde text-white mx-2 px-3">
+                        ➕ Crear Salida
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="verPrestamos.php" class="nav-link btn btn-primary text-white mx-2 px-3">
+                        📋 Ver Préstamos Activos
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="../logout.php" class="nav-link btn btn-gris text-white mx-2 px-3">
+                        🚪 Cerrar Sesión
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+
+    </div>
+</nav>
     <div class="container">
         <div class="card">
             <h2>➕ Registrar Salida</h2>

@@ -154,6 +154,54 @@ $devoluciones = $mov->consulta("
 </head>
 
 <body>
+    <!-- ✅ Menú de Navegación -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+
+        <!-- Logo / Título -->
+        <a class="navbar-brand fw-bold" href="prestatario.php">
+            📚 Préstamos
+        </a>
+
+        <!-- Botón hamburguesa -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuPrestamo">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Items del menú -->
+        <div class="collapse navbar-collapse" id="menuPrestamo">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
+                <li class="nav-item">
+                    <a href="crearPrestamo.php" class="nav-link btn btn-verde text-white mx-2 px-3">
+                        ➕ Crear Préstamo
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="registrarSalida.php" class="nav-link btn btn-verde text-white mx-2 px-3">
+                        ➕ Crear Salida
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="verPrestamos.php" class="nav-link btn btn-primary text-white mx-2 px-3">
+                        📋 Ver Préstamos Activos
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="../logout.php" class="nav-link btn btn-gris text-white mx-2 px-3">
+                        🚪 Cerrar Sesión
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+
+    </div>
+</nav>
+
     <div class="container mt-5">
         <div class="card shadow-lg">
             <h1 class="text-center mb-3">📦 Panel del Prestatario</h1>
@@ -166,13 +214,6 @@ $devoluciones = $mov->consulta("
                     <?= $mensajeAdvertencia ?>
                 </div>
             <?php endif; ?>
-
-            <div class="d-flex justify-content-center gap-3 mb-4 mt-4">
-                <a href="crearPrestamo.php" class="btn btn-verde btn-lg">➕ Crear Prestamo</a>
-                <a href="registrarSalida.php" class="btn btn-verde btn-lg">➕ Crear Salida</a>
-                <a href="verPrestamos.php" class="btn btn-primary btn-lg">📋 Ver Préstamos Activos</a>
-                <a href="../logout.php" class="btn btn-gris btn-lg">🚪 Cerrar Sesión</a>
-            </div>
 
             <hr>
 
