@@ -146,19 +146,52 @@ $compras = $mov->consulta("
 </head>
 
 <body>
+   
+<!-- ✅ Menú de Navegación -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+
+        <!-- Título o logo -->
+        <a class="navbar-brand fw-bold" href="comprador.php">
+            🛒 Compras
+        </a>
+
+
+        <!-- Items del menú -->
+        <div class="collapse navbar-collapse" id="menuCompras">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
+                <li class="nav-item">
+                    <a href="registrarCompra.php" class="btn btn-success btn-lg mx-2 px-4">
+                        🛒 Registrar Nueva Compra
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="compradorProducto.php" class="btn btn-primary btn-lg mx-2 px-4">
+                        📦 Ver Productos
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="../logout.php" class="btn btn-danger btn-lg mx-2 px-4">
+                        🚪 Cerrar Sesión
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+
     <div class="container mt-5">
         <div class="card">
             <h1 class="text-center mb-3">👤 Panel del Comprador</h1>
             <p class="text-center text-muted">
                 Bienvenido <strong><?= $nombre ?></strong> (<em><?= $nombreUsuario ?></em>) — Rol: <?= $rol ?>
             </p>
-
-            <!-- 🔘 Botones de acciones -->
-            <div class="d-flex justify-content-center flex-wrap gap-3 mb-4">
-                <a href="registrarCompra.php" class="btn btn-verde btn-lg">🛒 Registrar Nueva Compra</a>
-                <a href="compradorProducto.php" class="btn btn-azul btn-lg">📦 Ver Productos</a>
-                <a href="../logout.php" class="btn btn-gris btn-lg">🚪 Cerrar Sesión</a>
-            </div>
 
             <hr>
 
