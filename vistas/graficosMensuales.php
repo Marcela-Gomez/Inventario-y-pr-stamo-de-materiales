@@ -211,7 +211,7 @@ $result_prestamos_mes_detalle = $db->consulta($sql_prestamos_mes_detalle);
 body {
     font-family: Arial, sans-serif;
     background: #F8F5F0; /* Fondo Claro */
-    padding: 20px;
+    
     color: #2B2B2B; /* Texto Oscuro */
 }
 
@@ -286,8 +286,67 @@ button.excel-6meses {
     color: #F8F5F0;
 }
 </style>
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 </head>
 <body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+
+        <a class="navbar-brand fw-bold" href="../inicio.php">
+            🛍 Panel Principal
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+                data-bs-target="#navbarNav" aria-controls="navbarNav" 
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+
+                <li class="nav-item">
+                    <a class="btn btn-success me-2 mb-2" href="verProductoView.php">
+                        🛒 Ver Productos
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="btn btn-primary me-2 mb-2" href="usuariosView.php">
+                        👥 Gestionar Usuarios
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="btn btn-warning me-2 mb-2" href="verCategoria.php">
+                        📦 Ver Categorías
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="btn btn-info me-2 mb-2" href="graficos.php">
+                        📊 Gráficos
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="btn btn-info me-2 mb-2" href="graficosMensuales.php">
+                        📈 Gráficos Mensuales
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="btn btn-danger me-2 mb-2" href="../logout.php">
+                        🚪 Cerrar Sesión
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+
+    </div>
+</nav>
 
 <div id="reporte-movimientos">
 
