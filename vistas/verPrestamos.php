@@ -9,7 +9,7 @@ if (!isset($_SESSION['usuario'])) {
 
 $usuario = $_SESSION['usuario'];
 $id_usuario = $_SESSION['usuario']['id'];
-echo $id_usuario;
+
 $nombre = htmlspecialchars($usuario['nombre'] ?? '');
 
 $mov = new addMovimiento();
