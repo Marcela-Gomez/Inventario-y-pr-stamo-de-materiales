@@ -13,7 +13,7 @@ $usuario = $_SESSION['usuario'];
 
 // 🧩 Obtener ID de usuario de forma segura
 $id_usuario = $_SESSION['usuario']['id'];
-echo $id_usuario;
+
 if ($id_usuario <= 0) {
     echo "<script>alert('⚠️ Error: No se encontró el ID del usuario. Vuelve a iniciar sesión.'); window.location.href='../index.php';</script>";
     exit;
