@@ -122,6 +122,65 @@ if (empty($nombreUsuario) || empty($rol)) {
 </head>
 
 <body class="bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+
+        <a class="navbar-brand fw-bold" href="inicio.php">
+            🛍 Panel Principal
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+                data-bs-target="#navbarNav" aria-controls="navbarNav" 
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+
+                <li class="nav-item">
+                    <a class="btn btn-success me-2 mb-2" href="vistas/verProductoView.php">
+                        🛒 Ver Productos
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="btn btn-primary me-2 mb-2" href="vistas/usuariosView.php">
+                        👥 Gestionar Usuarios
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="btn btn-warning me-2 mb-2" href="vistas/verCategoria.php">
+                        📦 Ver Categorías
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="btn btn-info me-2 mb-2" href="vistas/graficos.php">
+                        📊 Gráficos
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="btn btn-info me-2 mb-2" href="vistas/graficosMensuales.php">
+                        📈 Gráficos Mensuales
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="btn btn-danger me-2 mb-2" href="logout.php">
+                        🚪 Cerrar Sesión
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+
+    </div>
+</nav>
+
+
     <div class="container mt-5">
         <div class="card shadow-lg p-4 text-center">
             <h1>👋 Bienvenido, <?= $nombre ?></h1>
@@ -137,27 +196,8 @@ if (empty($nombreUsuario) || empty($rol)) {
             <?php endif; ?>
 
             <hr>
-
-            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mt-4">
-                <a href="vistas/verProductoView.php" class="btn btn-success btn-lg px-4">
-                    🛒 Ver Productos
-                </a>
-                <a href="vistas/usuariosView.php" class="btn btn-primary btn-lg px-4">
-                    👥 Gestionar Usuarios
-                </a>
-                <a href="vistas/verCategoria.php" class="btn btn-warning btn-lg px-4">
-                    📦 Ver Categorías
-                </a>
-                <a href="vistas/graficos.php" class="btn btn-info btn-lg px-4">
-                    📊 Gráficos
-                </a>
-                <a href="vistas/graficosMensuales.php" class="btn btn-info btn-lg px-4">
-                    📈 Gráficos Mensuales
-                </a>
-                <a href="logout.php" class="btn btn-danger btn-lg px-4">
-                    🚪 Cerrar Sesión
-                </a>
-            </div>
+                
+            
         </div>
     </div>
 </body>
